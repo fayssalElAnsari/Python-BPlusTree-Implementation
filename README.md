@@ -14,23 +14,23 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * `Suppression` d'un element du B-arbre.
 
 ## Grille d'evaluation
-[ ] Demonstration + Documentation (apres chaque seance)
-[ ] Execution des 2 tests donnees
-[ ] Documentation (10 page au max), decrivant:
-    [ ] Description de l'historique de l'arbre B
-    [ ] Commentaires
-    [ ] l'algorithm de recherche commmente
-        [ ] Pseudo code
-        [ ] Complexite
-        [ ] Code python
-    [ ] l'algorithm d'insertion
-        [ ] Pseudo code
-        [ ] Complexite
-        [ ] Code python
-    [ ] l'algorithm de suppression 
-        [ ] Pseudo code
-        [ ] Complexite
-        [ ] Code python    
+* [ ] Demonstration + Documentation (apres chaque seance)
+* [ ] Execution des 2 tests donnees
+* [ ] Documentation (10 page au max), decrivant:
+    * [ ] Description de l'historique de l'arbre B
+    * [ ] Commentaires
+    * [ ] l'algorithm de recherche commmente
+        * [ ] Pseudo code
+        * [ ] Complexite
+        * [ ] Code python
+    * [ ] l'algorithm d'insertion
+        * [ ] Pseudo code
+        * [ ] Complexite
+        * [ ] Code python
+    * [ ] l'algorithm de suppression 
+        * [ ] Pseudo code
+        * [ ] Complexite
+        * [ ] Code python    
 
 ## Resumee des livrables
 #### 11/01/2022
