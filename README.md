@@ -46,7 +46,7 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * PseudoCode algorithm suppression
 * ...
 
-#### 18/01/2022
+#### 25/01/2022
 * Creation de la class `BPNode.py`
 * Creation du premier test d'insertion `test1()`
 * Correction des algorithm d'insertion
