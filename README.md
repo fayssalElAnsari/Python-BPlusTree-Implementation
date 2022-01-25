@@ -40,3 +40,15 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * ...
 
 #### 18/01/2022
+* Recherche BPlusTree et BTree
+* pseudo code algorithm insertion
+* pseudo code algorithm recherche
+* PseudoCode algorithm suppression
+* ...
+
+#### 18/01/2022
+* Creation de la class `BPNode.py`
+* Creation du premier test d'insertion `test1()`
+* Correction des algorithm d'insertion
+* Passage a un `ArbreB+` au lieu d'un `BArbre`
+* ...
