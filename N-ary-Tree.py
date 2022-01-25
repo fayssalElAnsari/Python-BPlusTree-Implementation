@@ -19,5 +19,10 @@ def class Node:
         pass
 
     
+    def find:
+        pass
+
+
+    
 
     
