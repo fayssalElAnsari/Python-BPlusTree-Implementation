@@ -1,5 +1,5 @@
 
-class Node:
+class BNode:
     '''
     In computer science, a B-tree is a self-balancing tree data structure
     that maintains sorted data and allows searches,
@@ -10,22 +10,39 @@ class Node:
     4. A non-leaf node with (k) children contains (k-1) keys.
     5. All leaves appear in the same level and carry no information.
     '''
-    def __init__(self, l, u, e, isRoot=False):
+    def __init__(self, m, elements=None, isRoot=False):
         '''
-        l is the 
+        m is the maximum number of elements of this node
+        e is only one number (element) to initialise the tree with?
+        e can be more than one number because of the condition:
+            =>     Every non-leaf node (except root) has at least ⌈m/2⌉ child nodes.
+
+        * what happens if we pass in only one element to the e param when we have l>1?
+            the root node is created nevertheless
+            and the l param is no longer a param but is calculated with l = m/2
+
         '''
-        self.children = []
-        self.elements = [e]
+        self.m = m
+        self.children = [] # no children or just leafs?
         self.isRoot = isRoot
-        
-
-
-def __init__(self, l, u):
-    self.elements = []
-    self.children = []
-    self.L = l
-    self.U = u
-    self.isLeaf = False
+        self.isLeaf = False
+        # if e is jut one element, meaning we could be in the case of the root node
+        # then we should set the elements with [e]
+        # else if it's already a list we set it with e directly
+        if type(e) is list:
+            # more than one element has been passed to e
+            # we should check for max before setting the elements values
+            # we might use the insrt() function later but for now we will check manually
+            if len(e) <= l:
+                self.elements = elements
+            else: 
+                print("/!\ The number of elements passed is bigger than Max")
+                for element in e:
+        else if e == None:
+            self.elements = []
+            self.isLeaf = True
+        else:
+            self.elements = elements #only one element
 
 
 
