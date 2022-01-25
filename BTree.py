@@ -37,7 +37,14 @@ class BNode:
                 self.elements = elements
             else: 
                 print("/!\ The number of elements passed is bigger than Max")
-                for element in e:
+                for e in range(len(elements)):
+                    if e<m:
+                        self.elements.append(elements[e])
+                    else:
+                        #create a new node and insert the remaining elements into it
+                        # it's easier to define insert() first and use it recursively
+
+
         else if e == None:
             self.elements = []
             self.isLeaf = True
@@ -57,6 +64,7 @@ def insert(self, e):
                 and we need to create a new node we should make also another child node
     4.... don't know about these
 
+    * should we pass in many elements or just one at a time??
     '''
     self.elements.append(e)
 
