@@ -92,16 +92,14 @@ class BPNode:
             if the current node is an inner node then we should compare the new_elment to the first key
             if the new element is less than the current key (first key) we should set the ....
             '''
-            for child in self.children:
-                if child.elements[0] == self.keys[0]:
-                    child.insert(new_element)
-            # index = 0
-            # current_key = self.keys[index]
-            # while(new_element >= current_key and self.keys[index+1]):
-            #     index = index + 1
-            #     current_key = self.keys[index]
-            #     print("index:" + str(index) +"; key:"+str(self.keys[index]))
-            # children[index].insert(new_element)
+            # for child in self.children:
+            #     if child.elements[0] == self.keys[0]:
+            #         child.insert(new_element)
+            index = 0
+            while(new_element <= self.keys[index]):
+                index = index + 1
+                # print("index:" + str(index) +"; key:"+str(self.keys[index]))
+            self.children[index].insert(new_element)
 
 
 
@@ -225,11 +223,11 @@ class BPNode:
 
 
     def __repr__(self):
-        return "Node :{keys=" + str(self.keys) + " ; elements=" + str(self.elements) + "; children="+str(self.children) +"; }"
+        return "Node :{keys=" + str(self.keys) + " ; elements=" + str(self.elements) + "; children="+str(self.children) +"}"
         
 
     def __str__(self):
-        return "Node :{keys=" + str(self.keys) + " ; elements=" + str(self.elements) + "; children="+str(self.children) +"; }"
+        return "Node :{keys=" + str(self.keys) + " ; elements=" + str(self.elements) + "; children="+str(self.children) +"}"
 
     def print_tree(self):
         # for child in self.children:
