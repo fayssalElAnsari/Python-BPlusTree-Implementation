@@ -52,3 +52,9 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * Correction des algorithm d'insertion
 * Passage a un `ArbreB+` au lieu d'un `BArbre`
 * ...
+
+#### 01/02/2022
+* fixed splitting elements
+* refactor constructor
+* fixed update_keys()
+* ...
