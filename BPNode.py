@@ -61,14 +61,14 @@ class BPNode:
             else:
                 leftSibling.insert(e)
         ## we will insert only one element at a time for the sake of simplicity
-        
+        # if the current node is an inner node we should check the keys and the first element of each child node
         '''
         if (len(self.children) >= self.m) or (len(self.elements) >= self.l):
             if(self.leftSibling == None):
                 if(self.rightSibling == None):
                     self.split(new_element)
-            #     else: self.rightSibling.insert(e)
-            # else: self.leftSibling.insert(e)
+                else: self.rightSibling.insert(e)
+            else: self.leftSibling.insert(e)
         else:    # inesrt the value in children and update the root's keys if necessary
             self.elements.append(new_element)
             self.elements.sort(reverse=False)
@@ -86,7 +86,7 @@ class BPNode:
             > using the keys?
         when splitting there are two cases:
             1. if the root to split is the root node it will stay the root node
-            2. if not the root node it will become the left node 
+            2. if not the root node it will become the left node
         '''
         print("splitting...")
         leftNode = BPNode(self.m, self.l)
@@ -97,18 +97,16 @@ class BPNode:
 
         leftNode.rightSibling = rightNode
         rightNode.leftSibling = leftNode
+
+        all_elements = self.elements.copy()
+        all_elements.append(new_element)
+        all_elements.sort(reverse=False)
         
-        for element in (self.elements[:(self.l)//2]) :
+        for element in (all_elements[:(self.l)//2]) :
             leftNode.insert(element)
-            print("inserting: " + str(element))
-            print(leftNode)
 
-        for element in (self.elements[(self.l)//2:]) :
+        for element in (all_elements[(self.l)//2:]) :
             rightNode.insert(element)
-            print("inserting: " + str(element))
-            print(rightNode)
-
-        rightNode.insert(new_element)
 
         self.children.append(leftNode)
         self.children.append(rightNode)
@@ -188,7 +186,7 @@ def test1():
     BPTree.print_tree()
 
     BPTree.insert(25) # 5 elements in a leaf node that can only contain (L=4) elements
-    # BPTree.insert(41)
+    BPTree.insert(41)
     # BPTree.insert(23)
     BPTree.print_tree()
 
