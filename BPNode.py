@@ -23,7 +23,7 @@ class BPNode:
 
     * there is a maximum number of (children nodes):M and a maximum number of (values):L of a node
     '''
-    def __init__(self, m, l, e=[], isRoot=False):
+    def __init__(self, m, l, isRoot=False):
         '''
         in a B+Tree the number of keys is the maximum number of leafs-1 (M-1)
         the first key is the first least element of the SECOND child node
@@ -34,7 +34,7 @@ class BPNode:
         self.l = l # the maximum number of elements
         
         self.children = [] # no children or just leafs?
-        self.elements = e
+        self.elements = []
         self.keys = []
 
         self.isRoot = isRoot # by default not a root
@@ -43,9 +43,6 @@ class BPNode:
         self.leftSibling = None
         self.rightSibling = None
         self.parent = None
-
-        self.insert(e)
-
 
     def insert(self, new_element):
         '''
@@ -72,16 +69,13 @@ class BPNode:
                     self.split(new_element)
             #     else: self.rightSibling.insert(e)
             # else: self.leftSibling.insert(e)
-            
-        elif new_element == []:
-            pass
         else:    # inesrt the value in children and update the root's keys if necessary
             self.elements.append(new_element)
             self.elements.sort(reverse=False)
             # print(self.elements)
 
-            if self.parent:
-                self.parent.update_keys()
+            # if self.parent:
+            #     self.parent.update_keys()
 
     def split(self, new_element):
         '''
@@ -104,11 +98,15 @@ class BPNode:
         leftNode.rightSibling = rightNode
         rightNode.leftSibling = leftNode
         
-        for element in self.elements[:(self.l)//2] :
+        for element in (self.elements[:(self.l)//2]) :
             leftNode.insert(element)
+            print("inserting: " + str(element))
+            print(leftNode)
 
-        for element in self.elements[(self.l)//2:] :
+        for element in (self.elements[(self.l)//2:]) :
             rightNode.insert(element)
+            print("inserting: " + str(element))
+            print(rightNode)
 
         rightNode.insert(new_element)
 
@@ -123,7 +121,7 @@ class BPNode:
         self.elements = []
         self.keys.append(rightNode.elements[0])
 
-        self.update_keys()
+        # self.update_keys()
 
 
     def find(self, e):
@@ -182,7 +180,7 @@ class BPNode:
         print(self)
 
 def test1():
-    BPTree = BPNode(3, 4, [], True)
+    BPTree = BPNode(3, 4, True)
     BPTree.insert(20)
     BPTree.insert(18)
     BPTree.insert(22)
