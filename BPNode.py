@@ -16,7 +16,7 @@
     => left sibling takes the smallest element of the right child
     => the lowest value in the right child could change
         => key in parent node should change also
-[ ] 4. another similar insertion to fill out the left child and update the key of parent
+[x] 4. another similar insertion to fill out the left child and update the key of parent
 [ ] 5. insertion into a right child (leaf non root) that has no right sibling and a full left sibling
     => child node splits and a key is added to the parent node
 [ ] 6. internal node (non leaf root) has too many children, has no left sibling and no right sibling
@@ -122,7 +122,7 @@ class BPNode:
                 all_elements.sort(reverse=False)
 
                 if (len(self.children) >= self.m) or (len(self.elements) >= self.l):
-                    if(self.leftSibling == None):
+                    if(self.leftSibling == None or len(self.leftSibling.elements) >= self.leftSibling.l):
                         if(self.rightSibling == None):
                             self.split(new_element)
                         else:
@@ -191,29 +191,32 @@ class BPNode:
             self.children.append(leftNode)
             self.children.append(rightNode)
 
-            print(leftNode)
-            print(rightNode)
-
             # turn into an inner node
             self.isLeaf = False
             self.elements = []
             self.keys.append(rightNode.elements[0])
 
-            # self.update_keys()
+            self.update_keys()
+
+            print(" >: " + str(leftNode))
+            print(" >: " + str(rightNode))
         else:   
-            if self.rightNode == None:# the node to split (self) is not a root node
+            if self.rightSibling == None:# the node to split (self) is not a root node
                 # in this case instead of keeping this node as an inner node we will make it a left leaf node?
 
                 rightNode = BPNode(self.m, self.l)
                 
-                rightNode.parent = self
+                rightNode.parent = self.parent
 
                 self.rightSibling = rightNode
-                rightNode.leftSibling = leftNode
+                rightNode.leftSibling = self
 
                 all_elements = self.elements.copy()
                 all_elements.append(new_element)
                 all_elements.sort(reverse=False)
+
+                self.elements = []
+                self.parent.children.append(rightNode)
                 
                 for element in (all_elements[:(self.l)//2]) :
                     self.insert(element)
@@ -221,8 +224,9 @@ class BPNode:
                 for element in (all_elements[(self.l)//2:]) :
                     rightNode.insert(element)
 
-                print(self)
-                print(rightNode)
+                print(" >: " + str(self))
+                print(" >: " + str(rightNode))
+                self.parent.update_keys()
 
     def find(self, e):
         '''
@@ -252,9 +256,14 @@ class BPNode:
         '''
         for i in range(len(self.children)-1):
             if self.children[i+1].isLeaf == True:
-                self.keys[i] = self.children[i+1].elements[0]
+                try:
+                    self.keys[i] = self.children[i+1].elements[0]
+                except IndexError:
+                    self.keys.append(None)
+                    self.keys[i] = self.children[i+1].elements[0]
+                print("updating key:" + str(i) + " to:" + str(self.children[i+1].elements[0]))
             else:
-                print("todo XD") 
+                print("todo XD")
 
     def balance(self):
         '''
@@ -293,7 +302,14 @@ def test1():
     BPTree.print_tree()
     BPTree.insert(42)
     BPTree.print_tree()
-    # BPTree.insert(53) # left sibling is full, right is None => inner node splits => a key 41 is added to root
+    BPTree.insert(53) # left sibling is full, right is None => inner node splits => a key 41 is added to root
+    BPTree.print_tree()
+
+    BPTree.insert(32)
+    BPTree.print_tree()
+    BPTree.insert(33)
+    BPTree.print_tree()
+    # BPTree.insert(38)
     # BPTree.print_tree()
 
 def main():
