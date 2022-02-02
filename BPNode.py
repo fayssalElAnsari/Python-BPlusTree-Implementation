@@ -234,6 +234,8 @@ class BPNode:
                 print(" >: " + str(self))
                 print(" >: " + str(rightNode))
                 self.parent.update_keys()
+            else:
+                self.parent.split(new_element)# TODO: final insertion scenario
 
     def find(self, e):
         '''
@@ -317,6 +319,9 @@ def test1():
     BPTree.insert(33)
     BPTree.print_tree()
     BPTree.insert(38)
+    BPTree.print_tree()
+
+    BPTree.insert(24) # root node should split
     BPTree.print_tree()
 
 def main():
