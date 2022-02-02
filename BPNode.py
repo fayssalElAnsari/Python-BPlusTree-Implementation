@@ -17,7 +17,7 @@
     => the lowest value in the right child could change
         => key in parent node should change also
 [x] 4. another similar insertion to fill out the left child and update the key of parent
-[ ] 5. insertion into a right child (leaf non root) that has no right sibling and a full left sibling
+[x] 5. insertion into a right child (leaf non root) that has no right sibling and a full left sibling
     => child node splits and a key is added to the parent node
 [ ] 6. internal node (non leaf root) has too many children, has no left sibling and no right sibling
     => it splits
@@ -117,19 +117,26 @@ class BPNode:
                     # if self.parent:
                     #     self.parent.update_keys()
             else:
-                all_elements = self.elements.copy()
-                all_elements.append(new_element)
-                all_elements.sort(reverse=False)
+                
 
                 if (len(self.children) >= self.m) or (len(self.elements) >= self.l):
                     if(self.leftSibling == None or len(self.leftSibling.elements) >= self.leftSibling.l):
-                        if(self.rightSibling == None):
+                        if(self.rightSibling == None or len(self.rightSibling.elements) >= self.rightSibling.l):
                             self.split(new_element)
                         else:
-                            self.rightSibling.insert(all_elements[0]) #lowest value = all_elements[0]
-                            self.elements = all_elements[1:].copy() # then put the remaining elements in self
+                            # all_elements = self.elements.copy()
+                            # all_elements.append(new_element)
+                            # all_elements.sort(reverse=False)
+                            # self.rightSibling.insert(all_elements[0]) #lowest value = all_elements[0]
+                            # self.elements = all_elements[1:].copy() # then put the remaining elements in self
+                            # self.parent.update_keys()
+                            self.rightSibling.elements.append(new_element)
+                            self.rightSibling.elements.sort(reverse=False)
                             self.parent.update_keys()
                     else:
+                        all_elements = self.elements.copy()
+                        all_elements.append(new_element)
+                        all_elements.sort(reverse=False)
                         self.leftSibling.insert(all_elements[0])
                         self.elements = all_elements[1:].copy()
                         self.parent.update_keys()
@@ -309,8 +316,8 @@ def test1():
     BPTree.print_tree()
     BPTree.insert(33)
     BPTree.print_tree()
-    # BPTree.insert(38)
-    # BPTree.print_tree()
+    BPTree.insert(38)
+    BPTree.print_tree()
 
 def main():
     test1()
