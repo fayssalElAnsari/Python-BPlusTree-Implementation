@@ -3,6 +3,30 @@
 # TODO: find function
 # TODO: delete function
 # TODO: show tree functionS
+
+'''
+### ALL POSSIBLE SCENARIOS DESCRIPTIONS AND TESTS ###
+[x] 1. insertion of non organized elements in the possible limit of L and M gives out an organized list 
+[x] 2. no left sibling and no right sibling => 
+    root leaf becomes root only,
+    two children leafs are created, largest elements are inserted in the new leaf node
+    if odd number of total elements => more elements in the right child than in the left
+    root node key array contains the least element of the right node
+[x] 3. insertion into a leaf non root node past the limit of L that has space in left sibling
+    => left sibling takes the smallest element of the right child
+    => the lowest value in the right child could change
+        => key in parent node should change also
+[ ] 4. another similar insertion to fill out the left child and update the key of parent
+[ ] 5. insertion into a right child (leaf non root) that has no right sibling and a full left sibling
+    => child node splits and a key is added to the parent node
+[ ] 6. internal node (non leaf root) has too many children, has no left sibling and no right sibling
+    => it splits
+    => same rules that apply to leaf nodes apply to inner nodes
+..
+.
+
+'''
+
 class BPNode:
     '''
     A B+ tree is an m-ary tree with a variable but often large number of children per node. 
@@ -62,31 +86,60 @@ class BPNode:
                 leftSibling.insert(e)
         ## we will insert only one element at a time for the sake of simplicity
         # if the current node is an inner node we should check the keys and the first element of each child node
+        there will be three types of nodes:
+        the first is a root (root and leaf root and not leaf)
+        the second is a leaf 
+        the third is an inner node meaning not leaf and not root
         '''
         if(self.isLeaf):
-            all_elements = self.elements.copy()
-            all_elements.append(new_element)
-            all_elements.sort(reverse=False)
+            if(self.isRoot):
+                all_elements = self.elements.copy()
+                all_elements.append(new_element)
+                all_elements.sort(reverse=False)
 
-            if (len(self.children) >= self.m) or (len(self.elements) >= self.l):
-                if(self.leftSibling == None):
-                    if(self.rightSibling == None):
-                        self.split(new_element)
-                    else: 
-                        self.rightSibling.insert(all_elements[0]) #lowest value = all_elements[0]
-                        self.elements = all_elements[1:].copy() # then put the remaining elements in self
+                if (len(self.children) >= self.m) or (len(self.elements) >= self.l):
+                    if(self.leftSibling == None):
+                        if(self.rightSibling == None):
+                            self.split(new_element)
+                        else:
+                            self.rightSibling.insert(all_elements[0]) #lowest value = all_elements[0]
+                            self.elements = all_elements[1:].copy() # then put the remaining elements in self
+                            self.parent.update_keys()
+                    else:
+                        self.leftSibling.insert(all_elements[0])
+                        self.elements = all_elements[1:].copy()
                         self.parent.update_keys()
-                else: 
-                    self.leftSibling.insert(all_elements[0])
-                    self.elements = all_elements[1:].copy()
-                    self.parent.update_keys()
-            else:    # inesrt the value in children and update the root's keys if necessary
-                self.elements.append(new_element)
-                self.elements.sort(reverse=False)
-                # print(self.elements)
+                else:    # inesrt the value in children and update the root's keys if necessary
+                    self.elements.append(new_element)
+                    self.elements.sort(reverse=False)
+                    # print(self.elements)
 
-                # if self.parent:
-                #     self.parent.update_keys()
+                    # if self.parent:
+                    #     self.parent.update_keys()
+            else:
+                all_elements = self.elements.copy()
+                all_elements.append(new_element)
+                all_elements.sort(reverse=False)
+
+                if (len(self.children) >= self.m) or (len(self.elements) >= self.l):
+                    if(self.leftSibling == None):
+                        if(self.rightSibling == None):
+                            self.split(new_element)
+                        else:
+                            self.rightSibling.insert(all_elements[0]) #lowest value = all_elements[0]
+                            self.elements = all_elements[1:].copy() # then put the remaining elements in self
+                            self.parent.update_keys()
+                    else:
+                        self.leftSibling.insert(all_elements[0])
+                        self.elements = all_elements[1:].copy()
+                        self.parent.update_keys()
+                else:    # inesrt the value in children and update the root's keys if necessary
+                    self.elements.append(new_element)
+                    self.elements.sort(reverse=False)
+                    # print(self.elements)
+
+                    # if self.parent:
+                    #     self.parent.update_keys()
         else:
             '''
             if the current node is an inner node then we should compare the new_elment to the first key
@@ -96,7 +149,7 @@ class BPNode:
             #     if child.elements[0] == self.keys[0]:
             #         child.insert(new_element)
             index = 0
-            while(new_element <= self.keys[index]):
+            while(len(self.keys) >= index+1 and new_element >= self.keys[index]):
                 index = index + 1
                 # print("index:" + str(index) +"; key:"+str(self.keys[index]))
             self.children[index].insert(new_element)
@@ -147,37 +200,29 @@ class BPNode:
             self.keys.append(rightNode.elements[0])
 
             # self.update_keys()
-        else:   # the node to split (self) is not a root node
+        else:   
+            if self.rightNode == None:# the node to split (self) is not a root node
                 # in this case instead of keeping this node as an inner node we will make it a left leaf node?
-            leftNode = BPNode(self.m, self.l)
-            rightNode = BPNode(self.m, self.l)
-            
-            leftNode.parent = self
-            rightNode.parent = self
 
-            leftNode.rightSibling = rightNode
-            rightNode.leftSibling = leftNode
+                rightNode = BPNode(self.m, self.l)
+                
+                rightNode.parent = self
 
-            all_elements = self.elements.copy()
-            all_elements.append(new_element)
-            all_elements.sort(reverse=False)
-            
-            for element in (all_elements[:(self.l)//2]) :
-                leftNode.insert(element)
+                self.rightSibling = rightNode
+                rightNode.leftSibling = leftNode
 
-            for element in (all_elements[(self.l)//2:]) :
-                rightNode.insert(element)
+                all_elements = self.elements.copy()
+                all_elements.append(new_element)
+                all_elements.sort(reverse=False)
+                
+                for element in (all_elements[:(self.l)//2]) :
+                    self.insert(element)
 
-            self.children.append(leftNode)
-            self.children.append(rightNode)
+                for element in (all_elements[(self.l)//2:]) :
+                    rightNode.insert(element)
 
-            print(leftNode)
-            print(rightNode)
-
-            # turn into an inner node
-            self.isLeaf = False
-            self.elements = []
-            self.keys.append(rightNode.elements[0])
+                print(self)
+                print(rightNode)
 
     def find(self, e):
         '''
@@ -248,7 +293,7 @@ def test1():
     BPTree.print_tree()
     BPTree.insert(42)
     BPTree.print_tree()
-    # BPTree.insert(53)
+    # BPTree.insert(53) # left sibling is full, right is None => inner node splits => a key 41 is added to root
     # BPTree.print_tree()
 
 def main():
