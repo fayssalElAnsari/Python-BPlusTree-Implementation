@@ -3,6 +3,7 @@
 # TODO: find function
 # TODO: delete function
 # TODO: show tree functionS
+# TODO: unit tests
 
 '''
 ### ALL POSSIBLE SCENARIOS DESCRIPTIONS AND TESTS ###
@@ -24,8 +25,13 @@
     => same rules that apply to leaf nodes apply to inner nodes
 ..
 .
-
 '''
+
+class BPTree:
+    def __init__(self, m, l):
+        self.root = BPNode()
+
+    
 
 class BPNode:
     '''
@@ -61,12 +67,17 @@ class BPNode:
         self.elements = []
         self.keys = []
 
-        self.isRoot = isRoot # by default not a root
-        self.isLeaf = True #every leaf is a leaf node at creation
-
         self.leftSibling = None
         self.rightSibling = None
         self.parent = None
+
+    def is_root(BPNode):
+        if BPNode.parent = None:
+            return true
+
+    def is_leaf(BPNode):
+        if len(BPNode.children) == 0:
+            return true
 
     def insert(self, new_element):
         '''
@@ -117,8 +128,6 @@ class BPNode:
                     # if self.parent:
                     #     self.parent.update_keys()
             else:
-                
-
                 if (len(self.children) >= self.m) or (len(self.elements) >= self.l):
                     if(self.leftSibling == None or len(self.leftSibling.elements) >= self.leftSibling.l):
                         if(self.rightSibling == None or len(self.rightSibling.elements) >= self.rightSibling.l):
@@ -160,8 +169,6 @@ class BPNode:
                 index = index + 1
                 # print("index:" + str(index) +"; key:"+str(self.keys[index]))
             self.children[index].insert(new_element)
-
-
 
     def split(self, new_element):
         '''
@@ -244,6 +251,7 @@ class BPNode:
         '''
         pass
 
+
     def delete(self, e):
         '''
         deletes an element from a B-Tree if already existant
@@ -257,6 +265,7 @@ class BPNode:
             for child in children:
                 if type(child) is BPNode:
                     child.delete(e)
+
 
     def update_keys(self):
         '''
@@ -297,7 +306,7 @@ class BPNode:
         #     child.print_tree()
         print(self)
 
-def test1():
+def test_insert_1():
     BPTree = BPNode(3, 4, True)
     BPTree.insert(20)
     BPTree.insert(18)
@@ -321,17 +330,20 @@ def test1():
     BPTree.insert(38)
     BPTree.print_tree()
 
-    BPTree.insert(24) # root node should split
-    BPTree.print_tree()
+    # BPTree.insert(24) # root node should split (using the same mechanism as before)
+    # BPTree.print_tree()
+    return BPTree
+
+def test_search_1():
+    BPTree = test_insert_1
+    BPTree.search(1)
+    
 
 def main():
     test1()
 
 if __name__== "__main__":
     main()
-        
-
-
     """
     ...
     repr
