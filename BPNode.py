@@ -30,8 +30,15 @@
 class BPTree:
     def __init__(self, m, l):
         self.root = BPNode()
+        self.m = m 
+        self.l = l
 
-    
+    def find(self, e):
+        '''
+        pass in a number and see if it's already in the tree
+        there must be an efficient way to look for an element without going through all the children nodes
+        '''
+        return self.root.find(e)
 
 class BPNode:
     '''
@@ -53,7 +60,7 @@ class BPNode:
 
     * there is a maximum number of (children nodes):M and a maximum number of (values):L of a node
     '''
-    def __init__(self, m, l, isRoot=False):
+    def __init__(self, m, l):
         '''
         in a B+Tree the number of keys is the maximum number of leafs-1 (M-1)
         the first key is the first least element of the SECOND child node
@@ -71,13 +78,13 @@ class BPNode:
         self.rightSibling = None
         self.parent = None
 
-    def is_root(BPNode):
-        if BPNode.parent = None:
-            return true
+    def isRoot(BPNode):
+        if BPNode.parent == None:
+            return True
 
-    def is_leaf(BPNode):
+    def isLeaf(BPNode):
         if len(BPNode.children) == 0:
-            return true
+            return True
 
     def insert(self, new_element):
         '''
@@ -102,8 +109,8 @@ class BPNode:
         the second is a leaf 
         the third is an inner node meaning not leaf and not root
         '''
-        if(self.isLeaf):
-            if(self.isRoot):
+        if(self.isLeaf()):
+            if(self.isRoot()):
                 all_elements = self.elements.copy()
                 all_elements.append(new_element)
                 all_elements.sort(reverse=False)
@@ -182,7 +189,7 @@ class BPNode:
             2. if not the root node it will become the left node
         '''
         print("splitting...")
-        if (self.isRoot):
+        if (self.isRoot()):
             leftNode = BPNode(self.m, self.l)
             rightNode = BPNode(self.m, self.l)
             
@@ -206,7 +213,6 @@ class BPNode:
             self.children.append(rightNode)
 
             # turn into an inner node
-            self.isLeaf = False
             self.elements = []
             self.keys.append(rightNode.elements[0])
 
@@ -248,8 +254,18 @@ class BPNode:
         '''
         pass in a number and see if it's already in the tree
         there must be an efficient way to look for an element without going through all the children nodes
+        ordered!!
         '''
-        pass
+        if self.elements:
+            for element in self.elements:
+                return element == e
+        elif self.keys:
+            for key in self.keys:
+                if key == e:
+                    return True
+            for key in self.keys:
+                if e < key:
+                    
 
 
     def delete(self, e):
@@ -273,7 +289,7 @@ class BPNode:
         some times we need to updates the parent node of the parent node how?
         '''
         for i in range(len(self.children)-1):
-            if self.children[i+1].isLeaf == True:
+            if self.children[i+1].isLeaf() == True:
                 try:
                     self.keys[i] = self.children[i+1].elements[0]
                 except IndexError:
@@ -307,7 +323,7 @@ class BPNode:
         print(self)
 
 def test_insert_1():
-    BPTree = BPNode(3, 4, True)
+    BPTree = BPNode(3, 4)
     BPTree.insert(20)
     BPTree.insert(18)
     BPTree.insert(22)
@@ -330,8 +346,8 @@ def test_insert_1():
     BPTree.insert(38)
     BPTree.print_tree()
 
-    # BPTree.insert(24) # root node should split (using the same mechanism as before)
-    # BPTree.print_tree()
+    BPTree.insert(24) # root node should split (using the same mechanism as before)
+    BPTree.print_tree()
     return BPTree
 
 def test_search_1():
@@ -340,7 +356,7 @@ def test_search_1():
     
 
 def main():
-    test1()
+    test_insert_1()
 
 if __name__== "__main__":
     main()
