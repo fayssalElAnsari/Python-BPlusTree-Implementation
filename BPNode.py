@@ -256,15 +256,18 @@ class BPNode:
         there must be an efficient way to look for an element without going through all the children nodes
         ordered!!
         '''
-        if self.elements:
+        if self.isLeaf():
             for element in self.elements:
-                return element == e
-        elif self.keys:
-            for key in self.keys:
-                if key == e:
+                if element == e:
                     return True
+            return False
+        else:
             for key in self.keys:
-                if e < key:
+                if (key == e):
+                    return True
+                elif (key > e):
+                    return self.children[self.keys.index(key)].find(e)
+            return self.children[len(self.children) - 1].find(e)
                     
 
 
@@ -346,17 +349,30 @@ def test_insert_1():
     BPTree.insert(38)
     BPTree.print_tree()
 
-    BPTree.insert(24) # root node should split (using the same mechanism as before)
-    BPTree.print_tree()
+    # BPTree.insert(24) # root node should split (using the same mechanism as before)
+    # BPTree.print_tree()
     return BPTree
 
 def test_search_1():
-    BPTree = test_insert_1
-    BPTree.search(1)
-    
+    BPTree = test_insert_1()
+    print(BPTree.find(1)) # false
+    print(BPTree.find(25)) # true
+    print(BPTree.find((38))) # true
+    print(BPTree.find(18)) # true
+    print(BPTree.find(28)) # true
+    print(BPTree.find(32)) # true
+    print(BPTree.find(33)) # true
+    print((BPTree.find(38))) # true
+    print((BPTree.find(39))) # true
+    print((BPTree.find(41))) # true
+    print(BPTree.find(53)) # true
+    print(BPTree.find(54)) # true
+    print(BPTree.find(100)) # false
+
 
 def main():
     test_insert_1()
+    test_search_1()
 
 if __name__== "__main__":
     main()
