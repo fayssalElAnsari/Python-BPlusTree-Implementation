@@ -264,7 +264,7 @@ class BPNode:
         else:
             for key in self.keys:
                 if (key == e):
-                    return (True, self.children[self.keys.index(key)].find(e)[1]) # fix?
+                    return (True, self.children[self.keys.index(key) + 1].find(e)[1]) # fix?
                 elif (key >= e):
                     return self.children[self.keys.index(key)].find(e)
             return self.children[len(self.children) - 1].find(e)
@@ -283,6 +283,7 @@ class BPNode:
         print(search_res)
 
         if search_res[0]:
+            print(e)
             print(search_res[0])
             print(search_res[1])
             print(search_res[1].elements)
@@ -375,19 +376,19 @@ def test_insert_1():
 
 def test_search_1():
     BPTree = test_insert_1()
-    print(BPTree.find(1)) # false
-    print(BPTree.find(25)) # true
-    print(BPTree.find((38))) # true
-    print(BPTree.find(18)) # true
-    print(BPTree.find(28)) # true
-    print(BPTree.find(32)) # true
-    print(BPTree.find(33)) # true
-    print((BPTree.find(38))) # true
-    print((BPTree.find(39))) # true
-    print((BPTree.find(41))) # true
-    print(BPTree.find(53)) # true
-    print(BPTree.find(54)) # true
-    print(BPTree.find(100)) # false
+    print(str(1) + " in " + str(BPTree.find(1))) # false
+    print(str(25) + " in " + str(BPTree.find(25))) # true
+    print(str(38) + " in " + str(BPTree.find(38))) # true
+    print(str(18) + " in " + str(BPTree.find(18))) # true
+    print(str(28) + " in " + str(BPTree.find(28))) # true
+    print(str(32) + " in " + str(BPTree.find(32))) # true
+    print(str(33) + " in " + str(BPTree.find(33))) # true
+    print(str(38) + " in " + str(BPTree.find(38))) # true
+    print(str(39) + " in " + str(BPTree.find(39))) # true
+    print(str(41) + " in " + str(BPTree.find(41))) # true
+    print(str(53) + " in " + str(BPTree.find(53))) # true
+    print(str(54) + " in " + str(BPTree.find(54))) # true
+    print(str(100) + " in " + str(BPTree.find(100))) # false
 
 def test_delete_1():
     a_tree = test_insert_1()
