@@ -65,6 +65,6 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * manual testing for delete and search
 * ...
 
-####### fix and optimize insert function
-####### add balancing tree function?
+###### fix and optimize insert function
+###### add balancing tree function?
 
