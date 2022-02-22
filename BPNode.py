@@ -288,7 +288,7 @@ class BPNode:
             print(search_res[1])
             print(search_res[1].elements)
             search_res[1].elements.remove(e)
-            # search_res[1].parent.update_keys()
+            search_res[1].parent.update_keys()
             return True
         else:
             return False
@@ -394,11 +394,17 @@ def test_delete_1():
     a_tree = test_insert_1()
     a_tree.delete(25) # deletes 25
     print(a_tree)
+    a_tree.delete(18)
+    print(a_tree)
+    a_tree.delete(23)
+    print(a_tree)
+    a_tree.delete(38)
+    print(a_tree)
 
 def main():
     # test_insert_1()
-    test_search_1()
-    # test_delete_1()
+    # test_search_1()
+    test_delete_1()
 
 if __name__== "__main__":
     main()
