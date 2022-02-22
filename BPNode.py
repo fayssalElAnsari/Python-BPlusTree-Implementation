@@ -259,13 +259,13 @@ class BPNode:
         if self.isLeaf():
             for element in self.elements:
                 if element == e:
-                    return True
-            return False
+                    return (True, self)
+            return (False, self)
         else:
             for key in self.keys:
                 if (key == e):
-                    return True
-                elif (key > e):
+                    return (True, self.children[self.keys.index(key)].find(e)[1]) # fix?
+                elif (key >= e):
                     return self.children[self.keys.index(key)].find(e)
             return self.children[len(self.children) - 1].find(e)
                     
@@ -278,12 +278,32 @@ class BPNode:
         and do nothing else.
         this function should probably use the previously defined function: find()
         '''
-        if e in self.children:
-            self.children.remove(e)
+        print(" !! delete start")
+        search_res = self.find(e)
+        print(search_res)
+
+        if search_res[0]:
+            print(search_res[0])
+            print(search_res[1])
+            print(search_res[1].elements)
+            search_res[1].elements.remove(e)
+            # search_res[1].parent.update_keys()
+            return True
         else:
-            for child in children:
-                if type(child) is BPNode:
-                    child.delete(e)
+            return False
+
+        # if self.isLeaf():
+        #     for element in self.elements:
+        #         if element == e:
+        #             self.elements.remove(e)
+        #             self.parent.update_keys()
+        #             break
+        # if e in self.children:
+        #     self.children.remove(e)
+        # else:
+        #     for child in children:
+        #         if type(child) is BPNode:
+        #             child.delete(e)
 
 
     def update_keys(self):
@@ -369,10 +389,15 @@ def test_search_1():
     print(BPTree.find(54)) # true
     print(BPTree.find(100)) # false
 
+def test_delete_1():
+    a_tree = test_insert_1()
+    a_tree.delete(25) # deletes 25
+    print(a_tree)
 
 def main():
-    test_insert_1()
+    # test_insert_1()
     test_search_1()
+    # test_delete_1()
 
 if __name__== "__main__":
     main()
