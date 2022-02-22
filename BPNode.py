@@ -109,7 +109,11 @@ class BPNode:
         the second is a leaf 
         the third is an inner node meaning not leaf and not root
         '''
-        if(self.isLeaf()):
+        if(not self.isLeaf()):
+            find_res = self.find(new_element)
+            if (not find_res[0]):
+                find_res[1].insert(new_element)
+        elif(self.isLeaf()):
             if(self.isRoot()):
                 all_elements = self.elements.copy()
                 all_elements.append(new_element)
@@ -292,20 +296,6 @@ class BPNode:
             return True
         else:
             return False
-
-        # if self.isLeaf():
-        #     for element in self.elements:
-        #         if element == e:
-        #             self.elements.remove(e)
-        #             self.parent.update_keys()
-        #             break
-        # if e in self.children:
-        #     self.children.remove(e)
-        # else:
-        #     for child in children:
-        #         if type(child) is BPNode:
-        #             child.delete(e)
-
 
     def update_keys(self):
         '''
