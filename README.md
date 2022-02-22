@@ -58,3 +58,13 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * refactor constructor
 * fixed update_keys()
 * ...
+
+#### 22/02/2022
+* fixed and optimized delete function (updating keys for parent nodes)
+* fixed and optimized find function
+* manual testing for delete and search
+* ...
+
+####### fix and optimize insert function
+####### add balancing tree function?
+
