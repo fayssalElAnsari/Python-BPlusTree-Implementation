@@ -144,12 +144,6 @@ class BPNode:
                         if(self.rightSibling == None or len(self.rightSibling.elements) >= self.rightSibling.l):
                             self.split(new_element)
                         else:
-                            # all_elements = self.elements.copy()
-                            # all_elements.append(new_element)
-                            # all_elements.sort(reverse=False)
-                            # self.rightSibling.insert(all_elements[0]) #lowest value = all_elements[0]
-                            # self.elements = all_elements[1:].copy() # then put the remaining elements in self
-                            # self.parent.update_keys()
                             self.rightSibling.elements.append(new_element)
                             self.rightSibling.elements.sort(reverse=False)
                             self.parent.update_keys()
@@ -163,22 +157,15 @@ class BPNode:
                 else:    # inesrt the value in children and update the root's keys if necessary
                     self.elements.append(new_element)
                     self.elements.sort(reverse=False)
-                    # print(self.elements)
 
-                    # if self.parent:
-                    #     self.parent.update_keys()
         else:
             '''
             if the current node is an inner node then we should compare the new_elment to the first key
             if the new element is less than the current key (first key) we should set the ....
             '''
-            # for child in self.children:
-            #     if child.elements[0] == self.keys[0]:
-            #         child.insert(new_element)
             index = 0
             while(len(self.keys) >= index+1 and new_element >= self.keys[index]):
                 index = index + 1
-                # print("index:" + str(index) +"; key:"+str(self.keys[index]))
             self.children[index].insert(new_element)
 
     def split(self, new_element):
@@ -389,6 +376,8 @@ def test_delete_1():
     a_tree.delete(23)
     print(a_tree)
     a_tree.delete(38)
+    print(a_tree)
+    a_tree.delete(1002)
     print(a_tree)
 
 def main():
