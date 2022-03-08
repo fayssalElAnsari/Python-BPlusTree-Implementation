@@ -27,6 +27,9 @@
 .
 '''
 
+import networkx as nx
+import matplotlib.pyplot as plt
+
 class BPTree:
     def __init__(self, m, l):
         self.root = BPNode()
@@ -379,11 +382,27 @@ def test_delete_1():
     print(a_tree)
     a_tree.delete(1002)
     print(a_tree)
+    visualize_tree(a_tree)
 
 def main():
     # test_insert_1()
     # test_search_1()
     test_delete_1()
+
+def visualize_tree(tree):
+    G = nx.Graph()
+    for child in tree.children:
+        if not child.isLeaf():
+            G.add_node(str(child.keys))
+        else:
+            G.add_node(child.elements)
+        G.add_edge(str(parent.keys), str(node.elements))
+    nx.draw(G, with_labels=True, font_weight='bold')
+
+
+        
+
+
 
 if __name__== "__main__":
     main()
