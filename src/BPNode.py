@@ -1,10 +1,3 @@
-
-# TODO: insert function
-# TODO: find function
-# TODO: delete function
-# TODO: show tree functionS
-# TODO: unit tests
-
 '''
 ### ALL POSSIBLE SCENARIOS DESCRIPTIONS AND TESTS ###
 [x] 1. insertion of non organized elements in the possible limit of L and M gives out an organized list 
@@ -26,22 +19,6 @@
 ..
 .
 '''
-
-import networkx as nx
-import matplotlib.pyplot as plt
-
-class BPTree:
-    def __init__(self, m, l):
-        self.root = BPNode()
-        self.m = m 
-        self.l = l
-
-    def find(self, e):
-        '''
-        pass in a number and see if it's already in the tree
-        there must be an efficient way to look for an element without going through all the children nodes
-        '''
-        return self.root.find(e)
 
 class BPNode:
     '''
@@ -219,7 +196,6 @@ class BPNode:
                 # in this case instead of keeping this node as an inner node we will make it a left leaf node?
 
                 rightNode = BPNode(self.m, self.l)
-                
                 rightNode.parent = self.parent
 
                 self.rightSibling = rightNode
@@ -398,10 +374,6 @@ def visualize_tree(tree):
             G.add_node(child.elements)
         G.add_edge(str(parent.keys), str(node.elements))
     nx.draw(G, with_labels=True, font_weight='bold')
-
-
-        
-
 
 
 if __name__== "__main__":

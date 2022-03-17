@@ -15,6 +15,10 @@ class BTreeNode:
         self.values = []
         self.keys = []
 
-def main
+    def main():
+        print("BTree main")
+
+    if __name__ == '__main__':
+        main()
 
     

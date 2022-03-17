@@ -12,8 +12,8 @@ test:doctest:
     image: python:latest
     script:
         - pip install -r ./requirements.txt
-        - python -m doctest -v ./src/BPNode.py
-        - python -m doctest -v ./src/BPTree.py
+        # - python -m doctest -v ./src/BPNode.py
+        # - python -m doctest -v ./src/BPTree.py
         - python ./test/test_BPNode.py
         - python ./test/test_BPTree.py
 
