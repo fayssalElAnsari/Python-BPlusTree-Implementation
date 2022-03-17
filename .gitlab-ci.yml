@@ -15,7 +15,7 @@ test:doctest:
         - python -m doctest -v ./src/BPNode.py
         - python -m doctest -v ./src/BPTree.py
         - python ./test/test_BPNode.py
-        - python ./test/BPTree.py
+        - python ./test/test_BPTree.py
 
 # Change pip's cache directory to be inside the project directory since we can
 # only cache local items.
