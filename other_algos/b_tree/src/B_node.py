@@ -53,8 +53,17 @@ class B_node:
         else:
             self.split(element)
 
+
     def split(self, element):
-        
+        all_keys = self.keys.copy()
+        all_keys.append(element)
+        all_keys.sort(reverse=false)
+        median_index = len(all_keys//2)
+        self.keys = allkeys[:median_index]
+        sibling_node = B_node(self.parent)
+        sibling_node.keys = all_keys[median_index+1:]
+        parent.insert_key(all_keys[median_index])
+
 
     def is_leaf(self):
         return true if self.children == [] else false
