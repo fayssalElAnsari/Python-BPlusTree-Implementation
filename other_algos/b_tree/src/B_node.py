@@ -85,13 +85,13 @@ class B_node:
 
 
     def __repr__(self):
-        children_str = "" if self.is_leaf() else ", \"children:\"" + str(self.children)
-        return "{\"keys\":" + str(self.keys) + children_str + "}" 
+        children_str = "" if self.is_leaf() else ", \"children\": " + str(self.children)
+        return "{\"keys\": " + str(self.keys) + children_str + "}" 
 
 
     def __str__(self):
-        children_str = "" if self.is_leaf() else ", \"children:\"" + str(self.children) 
-        return "{\"keys:\"" + str(self.keys) + children_str + "}"
+        children_str = "" if self.is_leaf() else ", \"children\": " + str(self.children) 
+        return "{\"keys: \"" + str(self.keys) + children_str + "}"
 
 
     if __name__ == '__main__':

@@ -27,11 +27,11 @@ class B_tree:
 
 
     def __repr__(self):
-       return "{\"keys:\"" + str(self.root_node.keys) + ", children="+str(self.root_node.children) +"}" 
+       return "{\"keys: \"" + str(self.root_node.keys) + ", \"children\": "+str(self.root_node.children) +"}" 
 
 
     def __str__(self):
-        return "{\"keys\":" + str(self.root_node.keys) + ", \"children\"="+str(self.root_node.children) +"}"
+        return "{\"keys\": " + str(self.root_node.keys) + ", \"children\": "+str(self.root_node.children) +"}"
         
 
     if __name__ == '__main__':
