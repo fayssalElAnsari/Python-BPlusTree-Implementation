@@ -39,16 +39,22 @@ class B_node:
 
     def insert(self, element):
         if self.is_leaf():
-            all_keys = self.keys.copy()
-            all_keys.append(element)
-            all_keys.sort(reverse=false)
-            if len(all_keys) < self.m - 1:
-                self.keys = all_keys
-            else:
-                self.split(element)
+            self.insert_key(element)
         else:
-            self.search_node(element).insert(element)         
+            self.search_node(element).insert(element)  
 
+
+    def insert_key(self, element):
+        all_keys = self.keys.copy()
+        all_keys.append(element)
+        all_keys.sort(reverse=false)
+        if len(all_keys) < self.m - 1:
+            self.keys = all_keys
+        else:
+            self.split(element)
+
+    def split(self, element):
+        
 
     def is_leaf(self):
         return true if self.children == [] else false
