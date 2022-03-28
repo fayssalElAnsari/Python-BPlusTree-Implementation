@@ -346,6 +346,7 @@ def test_search_1():
     print(str(54) + " in " + str(BPTree.find(54))) # true
     print(str(100) + " in " + str(BPTree.find(100))) # false
 
+
 def test_delete_1():
     a_tree = test_insert_1()
     a_tree.delete(25) # deletes 25
@@ -360,10 +361,12 @@ def test_delete_1():
     print(a_tree)
     visualize_tree(a_tree)
 
+
 def main():
     # test_insert_1()
     # test_search_1()
     test_delete_1()
+
 
 def visualize_tree(tree):
     G = nx.Graph()
