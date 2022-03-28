@@ -18,8 +18,8 @@ class B_node:
             if self.is_leaf():
                 return False
             else:
-                for i in range(len(self.keys) - 1):
-                    if element < keys[i]:
+                for i in range(len(self.keys)):
+                    if element < self.keys[i]:
                         return self.children[i].search_element(element)
                         break
                 return self.children[-1].search_element(element)
@@ -29,7 +29,7 @@ class B_node:
         if self.is_leaf():
             return self
         else:
-            for i in range(len(self.keys) - 1):
+            for i in range(len(self.keys)):
                 if element < self.keys[i]:
                     return self.children[i].search_node(element)
                     break
