@@ -2,10 +2,14 @@ class B_node:
     def main():
         print("B_node")
 
+
     def __init__(self, parent):
         self.parent = parent
         self.keys = []
         self.children = []
+
+        self.m = parent.m
+        self.l = parent.l
         
 
     def search_element(self, element):
@@ -17,9 +21,9 @@ class B_node:
             else:
                 for i in range(len(self.keys) - 1):
                     if element < keys[i]:
-                        self.children[i].search_element(element)
+                        return self.children[i].search_element(element)
                         break
-                self.children[-1].search_element(element)
+                return self.children[-1].search_element(element)
         
 
     def search_node(self, element):
@@ -28,9 +32,22 @@ class B_node:
         else:
             for i in range(len(self.keys) - 1):
                 if element < keys[i]:
-                    self.children[i].search_node(element)
+                    return self.children[i].search_node(element)
                     break
-            self.children[-1].search_node(element) 
+            return self.children[-1].search_node(element) 
+
+
+    def insert(self, element):
+        if self.is_leaf():
+            all_keys = self.keys.copy()
+            all_keys.append(element)
+            all_keys.sort(reverse=false)
+            if len(all_keys) < self.m - 1:
+                self.keys = all_keys
+            else:
+                self.split(element)
+        else:
+            self.search_node(element).insert(element)         
 
 
     def is_leaf(self):
