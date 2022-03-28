@@ -62,11 +62,19 @@ class B_node:
         self.keys = allkeys[:median_index]
         sibling_node = B_node(self.parent)
         sibling_node.keys = all_keys[median_index+1:]
-        parent.insert_key(all_keys[median_index])
+        if self.parent.parent:
+            parent.insert_key(all_keys[median_index])
+        else:
+            parent_node = B_node(self.parent)
+            parent_node.insert_key(all_keys[median_index])
+            self.parent = parent_node
+            sibling_node.parent(parent_node)
+            
 
 
     def is_leaf(self):
         return true if self.children == [] else false
+
 
     if __name__ == '__main__':
         main()
