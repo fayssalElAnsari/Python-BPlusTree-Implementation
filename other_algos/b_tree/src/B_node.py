@@ -1,6 +1,6 @@
 class B_node:
     def main():
-        print("B_tree")
+        print("B_node")
 
     def __init__(self, parent):
         self.parent = parent
