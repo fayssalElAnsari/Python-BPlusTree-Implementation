@@ -14,8 +14,7 @@ test:doctest:
         - pip install -r ./requirements.txt
         # - python -m doctest -v ./src/BPNode.py
         # - python -m doctest -v ./src/BPTree.py
-        - python ./test/test_BPNode.py
-        - python ./test/test_BPTree.py
+        - python -m unittest discover -s test
 
 # Change pip's cache directory to be inside the project directory since we can
 # only cache local items.

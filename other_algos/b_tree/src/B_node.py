@@ -34,7 +34,7 @@ class B_node:
                 if element < keys[i]:
                     return self.children[i].search_node(element)
                     break
-            return self.children[-1].search_node(element) 
+            return self.children[-1].search_node(element)
 
 
     def insert(self, element):
@@ -69,11 +69,14 @@ class B_node:
             parent_node.insert_key(all_keys[median_index])
             self.parent = parent_node
             sibling_node.parent(parent_node)
-            
 
 
     def is_leaf(self):
         return true if self.children == [] else false
+
+
+    def is_root(self):
+        return self.parent.parent == None
 
 
     if __name__ == '__main__':

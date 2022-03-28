@@ -1,7 +1,16 @@
+import sys
+import os
+sys.path.append(os.path.abspath('../src'))
+import B_tree
 import unittest
 
+
 class test_b_tree(unittest.TestCase):
+    def setUp(self):
+        
+
     def test_all_keys_increasing_order(self):
+
         pass
 
     def test_all_leafs_have_no_children(self):
