@@ -7,7 +7,7 @@ import unittest
 
 class test_b_tree(unittest.TestCase):
     def setUp(self):
-        self.tree = B_tree(4)
+        self.tree = B_tree(3)
 
     def test_root_splits(self):
         self.tree.insert(5)
@@ -60,6 +60,7 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[2].children, [])
 
         self.tree.insert(4)
+        print(self.tree)
         self.assertEqual(self.tree.root_node.keys, [5])
         self.assertEqual(self.tree.root_node.children[0].keys, [3])
         self.assertEqual(self.tree.root_node.children[0].children[0].keys, [1, 2])
@@ -67,9 +68,6 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[1].keys, [10])
         self.assertEqual(self.tree.root_node.children[1].children[0].keys, [7])
         self.assertEqual(self.tree.root_node.children[1].children[1].keys, [16])
-
-
-
 
 
     def test_all_keys_increasing_order(self):

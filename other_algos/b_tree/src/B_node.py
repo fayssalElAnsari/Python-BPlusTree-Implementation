@@ -18,7 +18,7 @@ class B_node:
             if self.is_leaf():
                 return False
             else:
-                for i in range(len(self.keys)):
+                for i in range(len(self.keys) - 1):
                     if element < self.keys[i]:
                         return self.children[i].search_element(element)
                         break
@@ -47,7 +47,7 @@ class B_node:
         all_keys = self.keys.copy()
         all_keys.append(element)
         all_keys.sort(reverse=False)
-        if len(all_keys) < self.m - 1:
+        if len(all_keys) < self.m:
             self.keys = all_keys
         else:
             self.split(element)
@@ -57,6 +57,7 @@ class B_node:
         all_keys = self.keys.copy()
         all_keys.append(element)
         all_keys.sort(reverse=False)
+        print(all_keys)
         median_index = len(all_keys)//2
         self.keys = all_keys[:median_index]
         sibling_node = B_node(self.parent)
@@ -67,6 +68,7 @@ class B_node:
         else:
             parent_node = B_node(self.parent)
             parent_node.insert_key(all_keys[median_index])
+            
             parent_node.children.append(self)
             parent_node.children.append(sibling_node)
             self.parent.root_node = parent_node
@@ -83,11 +85,13 @@ class B_node:
 
 
     def __repr__(self):
-       return "Node :{keys=" + str(self.keys) + "; children=" + str(self.children) + "}" 
+        children_str = "" if self.is_leaf() else ", \"children:\"" + str(self.children)
+        return "{\"keys\":" + str(self.keys) + children_str + "}" 
 
 
     def __str__(self):
-        return "Node :{keys=" + str(self.keys) + "; children=" + str(self.children) + "}"
+        children_str = "" if self.is_leaf() else ", \"children:\"" + str(self.children) 
+        return "{\"keys:\"" + str(self.keys) + children_str + "}"
 
 
     if __name__ == '__main__':
