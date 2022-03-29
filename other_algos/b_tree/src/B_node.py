@@ -53,38 +53,40 @@ class B_node:
             self.split(element)
 
 
+    def delete_key(self, element):
+        self.keys.delete(element)
+
+
     def split(self, element):
         self.print_whole_tree()
         all_keys = self.keys.copy()
         all_keys.append(element)
         all_keys.sort(reverse=False)
         median_index = len(all_keys)//2
-        print(all_keys)
         self.keys = all_keys[:median_index]
         sibling_node = B_node(self.parent)
         sibling_node.keys = all_keys[median_index+1:]
         all_children = self.children
         children_index = len(all_children)//2
-        self.children = all_children[:children_index+1]
-        sibling_node.children = all_children[children_index+1:]
-        
+        self.children = all_children[:children_index]
+        sibling_node.children = all_children[children_index:]
         if not self.is_root():
-            self.parent.insert_key(all_keys[median_index])
             self.parent.children.insert(self.parent.children.index(self) + 1, sibling_node)
+            self.parent.insert_key(all_keys[median_index])
             self.print_whole_tree()
-            print("end split")
         else:
             parent_node = B_node(self.parent)
             parent_node.insert_key(all_keys[median_index])
-
             parent_node.children.append(self)
-
             parent_node.children.append(sibling_node)
             self.parent.root_node = parent_node
             self.parent = parent_node
             sibling_node.parent = parent_node
             self.print_whole_tree()
-            print("end split")
+
+
+    def delete(self, element):
+        self.search_node(element).delete_key(element)
 
 
     def is_leaf(self):

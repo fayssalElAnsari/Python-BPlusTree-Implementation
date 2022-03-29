@@ -51,7 +51,6 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[2].children, [])
 
         self.tree.insert(7)
-        print(self.tree)
         self.assertEqual(self.tree.root_node.keys, [3, 10])
         self.assertEqual(self.tree.root_node.children[0].keys, [1, 2])
         self.assertEqual(self.tree.root_node.children[0].children, [])
@@ -60,8 +59,8 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[2].keys, [16])
         self.assertEqual(self.tree.root_node.children[2].children, [])
 
+        print("------------------------------")
         self.tree.insert(4)
-        print(self.tree)
         self.assertEqual(self.tree.root_node.keys, [5])
         self.assertEqual(self.tree.root_node.children[0].keys, [3])
         self.assertEqual(self.tree.root_node.children[0].children[0].keys, [1, 2])
@@ -69,6 +68,18 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[1].keys, [10])
         self.assertEqual(self.tree.root_node.children[1].children[0].keys, [7])
         self.assertEqual(self.tree.root_node.children[1].children[1].keys, [16])
+
+        self.tree.insert(20)
+        self.assertEqual(self.tree.root_node.keys, [5])
+        self.assertEqual(self.tree.root_node.children[0].keys, [3])
+        self.assertEqual(self.tree.root_node.children[0].children[0].keys, [1, 2])
+        self.assertEqual(self.tree.root_node.children[0].children[1].keys, [4])
+        self.assertEqual(self.tree.root_node.children[1].keys, [10])
+        self.assertEqual(self.tree.root_node.children[1].children[0].keys, [7])
+        self.assertEqual(self.tree.root_node.children[1].children[1].keys, [16, 20])
+
+        self.tree.insert(25)
+        # self.tree.insert(19)
 
 
     def test_all_keys_increasing_order(self):

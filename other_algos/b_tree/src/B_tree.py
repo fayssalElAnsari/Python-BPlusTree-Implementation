@@ -6,8 +6,6 @@ class B_tree:
         self.l = [m/2]
         self.root_node = B_node(self)
         self.parent = None
-        self.keys = []
-        self.children = []
         
 
     def search_element(self, element):
@@ -28,12 +26,19 @@ class B_tree:
     
     def digraph(self):
         header1 = "digraph {"
-        header2 = "node [shape = record,height=.1];"
+        header2 = "node [shape = record, height=.1];"
         arcs = ""
         nodes = ""
         body = ""
         footer = " }"    
         return header1 + header2 + body + footer
+
+
+    def depth_first_search(node):
+        pass
+
+    def breadth_first_search(self):
+        pass
 
 
     def __repr__(self):
