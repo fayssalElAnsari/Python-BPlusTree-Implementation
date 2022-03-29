@@ -40,7 +40,7 @@ class B_node:
         if self.is_leaf():
             self.insert_key(element)
         else:
-            self.search_node(element).insert(element)  
+            (self.search_node(element)).insert(element)  
 
 
     def insert_key(self, element):
@@ -54,25 +54,37 @@ class B_node:
 
 
     def split(self, element):
+        self.print_whole_tree()
         all_keys = self.keys.copy()
         all_keys.append(element)
         all_keys.sort(reverse=False)
-        print(all_keys)
         median_index = len(all_keys)//2
+        print(all_keys)
         self.keys = all_keys[:median_index]
         sibling_node = B_node(self.parent)
         sibling_node.keys = all_keys[median_index+1:]
+        all_children = self.children
+        children_index = len(all_children)//2
+        self.children = all_children[:children_index+1]
+        sibling_node.children = all_children[children_index+1:]
+        
         if not self.is_root():
             self.parent.insert_key(all_keys[median_index])
             self.parent.children.insert(self.parent.children.index(self) + 1, sibling_node)
+            self.print_whole_tree()
+            print("end split")
         else:
             parent_node = B_node(self.parent)
             parent_node.insert_key(all_keys[median_index])
+
             parent_node.children.append(self)
+
             parent_node.children.append(sibling_node)
             self.parent.root_node = parent_node
             self.parent = parent_node
             sibling_node.parent = parent_node
+            self.print_whole_tree()
+            print("end split")
 
 
     def is_leaf(self):
@@ -91,8 +103,18 @@ class B_node:
     # http://ysangkok.github.io/js-clrs-btree/btree.html
     def __str__(self):
         children_str = "" if self.is_leaf() else ", \"children\": " + str(self.children) 
-        return "{\"keys: \"" + str(self.keys) + children_str + "}"
+        return "{\"keys\": " + str(self.keys) + children_str + "}"
 
+
+    def print_whole_tree(self):
+        '''
+        if enough time to implement animation function this
+        function could come in handy
+        '''
+        root_node = self
+        while root_node.parent != None:
+            root_node = root_node.parent
+        print(root_node)
 
     if __name__ == '__main__':
         main()
