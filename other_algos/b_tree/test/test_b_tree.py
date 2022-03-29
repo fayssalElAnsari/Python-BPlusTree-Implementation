@@ -51,6 +51,7 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[2].children, [])
 
         self.tree.insert(7)
+        print(self.tree)
         self.assertEqual(self.tree.root_node.keys, [3, 10])
         self.assertEqual(self.tree.root_node.children[0].keys, [1, 2])
         self.assertEqual(self.tree.root_node.children[0].children, [])

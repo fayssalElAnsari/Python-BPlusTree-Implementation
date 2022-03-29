@@ -25,6 +25,14 @@ class B_tree:
     def main():
         print("B_tree")
 
+    
+    def digraph(self):
+        header1 = "digraph {"
+        header2 = "node [shape = record,height=.1];"
+        body = ""
+        footer = " }"    
+        return header1 + header2 + body + footer
+
 
     def __repr__(self):
        return "{\"keys: \"" + str(self.root_node.keys) + ", \"children\": "+str(self.root_node.children) +"}" 

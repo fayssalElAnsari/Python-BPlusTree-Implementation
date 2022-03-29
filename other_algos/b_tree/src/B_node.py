@@ -68,7 +68,6 @@ class B_node:
         else:
             parent_node = B_node(self.parent)
             parent_node.insert_key(all_keys[median_index])
-            
             parent_node.children.append(self)
             parent_node.children.append(sibling_node)
             self.parent.root_node = parent_node
@@ -89,6 +88,7 @@ class B_node:
         return "{\"keys\": " + str(self.keys) + children_str + "}" 
 
 
+    # http://ysangkok.github.io/js-clrs-btree/btree.html
     def __str__(self):
         children_str = "" if self.is_leaf() else ", \"children\": " + str(self.children) 
         return "{\"keys: \"" + str(self.keys) + children_str + "}"
