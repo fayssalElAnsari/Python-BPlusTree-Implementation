@@ -70,6 +70,8 @@ class B_node:
         children_index = len(all_children)//2
         self.children = all_children[:children_index]
         sibling_node.children = all_children[children_index:]
+        for child in all_children[children_index:]:
+            child.parent = sibling_node
         if not self.is_root():
             self.parent.children.insert(self.parent.children.index(self) + 1, sibling_node)
             self.parent.insert_key(all_keys[median_index])

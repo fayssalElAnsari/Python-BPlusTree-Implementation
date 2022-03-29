@@ -59,7 +59,6 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[2].keys, [16])
         self.assertEqual(self.tree.root_node.children[2].children, [])
 
-        print("------------------------------")
         self.tree.insert(4)
         self.assertEqual(self.tree.root_node.keys, [5])
         self.assertEqual(self.tree.root_node.children[0].keys, [3])
@@ -79,7 +78,9 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[1].children[1].keys, [16, 20])
 
         self.tree.insert(25)
-        # self.tree.insert(19)
+
+        self.tree.insert(19)
+        print(self.tree)
 
 
     def test_all_keys_increasing_order(self):
