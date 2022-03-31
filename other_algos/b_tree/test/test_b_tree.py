@@ -9,6 +9,7 @@ class test_b_tree(unittest.TestCase):
     def setUp(self):
         self.tree = B_tree(3)
 
+    # insert 5, 1, 3, 16, 10, 2, 7, 4, 20, 25, 19, 6, 8, 17, 18, 21, 23
     def test_root_splits(self):
         self.tree.insert(5)
         self.assertEqual(self.tree.root_node.keys, [5])
@@ -175,6 +176,10 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[1].children[0].children[1].keys, [18, 19])
         self.assertEqual(self.tree.root_node.children[1].children[1].children[0].keys, [21])
         self.assertEqual(self.tree.root_node.children[1].children[1].children[1].keys, [25])
+
+        ##### BEGIN DELETE TESTS #####
+        self.tree.delete(25)
+        print(self.tree)
         
 
     def test_all_keys_increasing_order(self):
