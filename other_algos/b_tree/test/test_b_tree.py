@@ -287,15 +287,33 @@ class test_b_tree(unittest.TestCase):
 
 
     def root_node_have_minimum_of_one_key(self):
-        pass
+        self.tree.insert(self.elements)
+        self.assertTrue(len(self.tree.root_node.keys) >= 1)
 
 
     def all_non_leaf_nodes_have_at_least_two_children(self):
-        pass
+        self.tree.insert(self.elements)
+        all_nodes = self.tree.depth_first_search()
+        leafs = []
+        for node in all_nodes:
+            if node.is_leaf():
+                leafs.append(node)
+        internal_nodes = [node for node in all_nodes if node not in leafs]
+        for node in internal_nodes:
+            self.assertTrue(len(node.children) >= 2)
 
 
     def non_leaf_node_with_k_minus_one_keys_contains_k_children(self):
-        pass
+        self.tree.insert(self.elements)
+        all_nodes = self.tree.depth_first_search()
+        leafs = []
+        for node in all_nodes:
+            if node.is_leaf():
+                leafs.append(node)
+        internal_nodes = [node for node in all_nodes if node not in leafs]
+        for node in internal_nodes:
+            k = len(node.children)
+            self.assertTrue(len(node.keys) == k)
 
 
 if __name__ == '__main__':
