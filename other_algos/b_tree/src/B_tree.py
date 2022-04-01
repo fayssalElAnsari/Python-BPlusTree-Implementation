@@ -107,8 +107,7 @@ class B_tree:
 
         Returns
         -------
-            true: if the element exists
-            false: if the element doesn't exist in the tree
+            None
         '''
         self.root_node.delete(element)
 
@@ -135,7 +134,6 @@ class B_tree:
 
 
     def breadth_first_search(self):
-
         pass
 
 

@@ -4,6 +4,21 @@ class B_node:
 
 
     def __init__(self, parent):
+        '''
+        Initializes a B_node instance
+
+        This function will make a B_node object that has a 
+        parent the parent passed in in argument
+
+        Parameters
+        ----------
+        parent : B_node or Btree
+            The parent of the current tree
+
+        Returns
+        -------
+            An instance of the B_node class
+        '''
         self.parent = parent
         self.keys = []
         self.children = []
@@ -12,6 +27,28 @@ class B_node:
         
 
     def search_element(self, element):
+        '''
+        Search for an element in the tree
+
+        This function will check if an element exists in a given tree.
+        The way it works is by calling itself recursively on the current node.
+        starting from the current node it will check the keys for the existance
+        of the element, if it exists it will return true. If not it will check if
+        the current node is a leaf. If it's a leaf and there element is not in the
+        keys then element doesn't exist in the current search. If it's not a leaf
+        it will search all the children of the current node and therefore their 
+        children recursively.
+
+        Parameters
+        ----------
+        element : int
+            The element to be checked if it exists in the current B_tree
+
+        Returns
+        -------
+            true: if the element exists in the current search
+            false: if the element doesn't exist in the search
+        '''
         if element in self.keys:
             return True
         else:
@@ -26,6 +63,27 @@ class B_node:
         
 
     def search_node(self, element):
+        '''
+        Search for a node containing the element in this node
+
+        This function will check if an element exists in this node.
+        The way it works is by calling itself recursively on the current node.
+        starting from the current node it will check the keys for the existance
+        of the element, if it exists it will return the node. If not it will 
+        check if the current node is a leaf. If it's a leaf and the element 
+        is not in the keys then element doesn't exist in the current search. 
+        If it's not a leaf it will search all the children of the current 
+        node and therefore their children recursively.
+
+        Parameters
+        ----------
+        element : int
+            The element to be checked if it exists in the current B_tree
+
+        Returns
+        -------
+            B_node: the node in which this current element is or should be
+        '''
         if self.is_leaf():
             return self
         else:
@@ -37,6 +95,24 @@ class B_node:
 
 
     def insert(self, element):
+        '''
+        Inserts an element in this node
+
+        This function will insert an element in the current node.
+        it can take in either a list of elements or an element.
+        if the current node is a leaf it will use another function to insert
+        the key directly into the list of keys of the current node.
+        else it will search the node for the element and call itself on the result
+
+        Parameters
+        ----------
+        element : int
+            The element to be inserted in the current B_node
+
+        Returns
+        -------
+            None
+        '''
         if type(element) == list:
             for e in element:
                 self.insert(e)
@@ -48,6 +124,26 @@ class B_node:
 
 
     def insert_key(self, element):
+        '''
+        Inserts an element in this node
+
+        This function will insert an element in the current leaf.
+        It will copy the list of keys in a new variable and then
+        append the new element on it. Since the keys should be ordered
+        the all_keys list will be sorted in ascending order.
+        If the length of all keys is less than the order meaning 
+        the current leaf is not yet full we can just assign the all_keys
+        variable to the keys of this leaf. If not then we need to split this leaf
+
+        Parameters
+        ----------
+        element : int
+            The element to be inserted in the current leaf's list of keys
+
+        Returns
+        -------
+            None
+        '''
         all_keys = self.keys.copy()
         all_keys.append(element)
         all_keys.sort(reverse=False)
@@ -58,28 +154,113 @@ class B_node:
 
 
     def delete(self, element):
+        '''
+        Inserts an element in this node
+
+        This function will insert an element in the current node.
+        it can take in either a list of elements or an element.
+        if the current node is a leaf it will use another function to insert
+        the key directly into the list of keys of the current node.
+        else it will search the node for the element and call itself on the result
+
+        Parameters
+        ----------
+        element : int
+            The element to be inserted in the current B_node
+
+        Returns
+        -------
+            None
+        '''
         self.search_node(element).delete_key(element)
 
         self.balance()
 
 
     def delete_key(self, element):
+        '''
+        deletes a keys from the current node directly.
+
+        This function will be called on a 
+
+        Parameters
+        ----------
+        element : int
+            The element to be deleted from the current B_node
+
+        Returns
+        -------
+            None
+        '''
         self.keys.remove(element)
 
 
     def balance(self):
+        '''
+        Balances the current node and its descendents
+
+        This function will be called after each deletion operation in order 
+        to balance the current node and it's descendents
+
+        Parameters
+        ----------
+            None
+
+        Returns
+        -------
+            None
+        '''
         self.delete_empty_child()
         for child in self.children:
             child.balance()
 
 
     def delete_empty_child(self):
+        '''
+        Deletes every empty child this current node has
+        
+        This function is a part of the balancing procedure
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+            None
+        '''
         for child in self.children:
             if (child.keys == []):
                 self.children.remove(child)
 
 
     def split(self, element):
+        '''
+        Split the current node in two
+
+        This function will take in an element and split the current node
+        in two. The first step is to copy all the keys into a new variable
+        then split them in half and then do the same for the children also
+        the median key will be given to the parent. And the parent of the 
+        children will be updated. A sibling node containing the right part of 
+        the split is created.
+        If the current node is not the root then list of children of the parent
+        should be updated by taking in the sibling node directly after the current
+        node. And the key is inserted in the parent as stated earlier. In this
+        implementation the node to be split is traversed. There is another way
+        to insert an element without having to traverse the nodes to be split
+        by checking if the node is full and therefore traversing the tree only 
+        one time.
+
+        Parameters
+        ----------
+        element : int
+            The element that will be added and caused the split
+
+        Returns
+        -------
+            None
+        '''
         all_keys = self.keys.copy()
         all_keys.append(element)
         all_keys.sort(reverse=False)
@@ -108,10 +289,40 @@ class B_node:
 
 
     def is_leaf(self):
+        '''
+        checks if the current node is a leaf
+
+        this function will return true if the current node is a leaf
+        and return fals if not. It checks if the node has any children to
+        know if it's a leaf.
+
+        Parameters
+        ----------
+            None
+
+        Returns
+        -------
+            None
+        '''
         return True if self.children == [] else False
 
 
     def is_root(self):
+        '''
+        Checks if the current node is a root of tree
+
+        It does this by checking the parent of its parent
+        to see if it's equal to None. Since the parent of a tree
+        is None
+
+        Parameters
+        ----------
+            None
+
+        Returns
+        -------
+            None
+        '''
         return self.parent.parent == None
 
 
@@ -122,12 +333,17 @@ class B_node:
 
     # http://ysangkok.github.io/js-clrs-btree/btree.html
     def __str__(self):
+        '''
+        The current representation have been modified in order to be visualized in:
+        # http://ysangkok.github.io/js-clrs-btree/btree.html
+        '''
         children_str = "" if self.is_leaf() else ", \"children\": " + str(self.children) 
         return "{\"keys\": " + str(self.keys) + children_str + "}"
 
 
     def print_whole_tree(self):
         '''
+        This function will print the whole tree
         if enough time to implement animation function this
         function could come in handy
         '''
