@@ -249,17 +249,37 @@ class test_b_tree(unittest.TestCase):
     def test_all_internal_nodes_have_at_most_n_minus_one_keys(self):
         self.tree.insert(self.elements)
         all_nodes = self.tree.depth_first_search()
+        leafs = []
         for node in all_nodes:
-            self.assertTrue(len(node.keys) <= self.tree.l)
+            if node.is_leaf():
+                leafs.append(node)
+        internal_nodes = [node for node in all_nodes if node not in leafs]
+        for node in internal_nodes:
+            self.assertTrue(len(node.keys) <= self.tree.m)
         
 
     def test_all_internal_nodes_have_at_most_n_children(self):
-        
-        pass
+        self.tree.insert(self.elements)
+        all_nodes = self.tree.depth_first_search()
+        leafs = []
+        for node in all_nodes:
+            if node.is_leaf():
+                leafs.append(node)
+        internal_nodes = [node for node in all_nodes if node not in leafs]
+        for node in internal_nodes:
+            self.assertTrue(len(node.children) <= self.tree.m)
 
 
     def test_all_internal_nodes_have_at_least_n_over_two_children(self):
-        pass
+        self.tree.insert(self.elements)
+        all_nodes = self.tree.depth_first_search()
+        leafs = []
+        for node in all_nodes:
+            if node.is_leaf():
+                leafs.append(node)
+        internal_nodes = [node for node in all_nodes if node not in leafs]
+        for node in internal_nodes:
+            self.assertTrue(len(node.children) >= self.tree.l)
 
 
     def all_leaves_have_same_depth(self):
