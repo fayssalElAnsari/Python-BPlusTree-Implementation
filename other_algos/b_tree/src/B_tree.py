@@ -46,7 +46,7 @@ class B_tree:
             true: if the element exists
             false: if the element doesn't exist in the tree
         '''
-        self.root_node.search_element(element)
+        return self.root_node.search_element(element)
         
 
     def search_node(self, element):
@@ -68,7 +68,7 @@ class B_tree:
             given element or the node in which that element should be if
             it did exist
         '''
-        self.root_node.search_node(element)
+        return self.root_node.search_node(element)
 
     
     def insert(self, element):

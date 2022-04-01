@@ -208,12 +208,19 @@ class test_b_tree(unittest.TestCase):
         ## verification insertion
         self.assertFalse(self.tree_test1.search_element(42)) 
         self.tree_test1.insert(42)
-        print(self.tree_test1)
         self.assertTrue(self.tree_test1.search_element(42))
-
         # TEST 2
         self.tree_test2 = B_tree(11, 6)
+        for index in range(10, 5001, 10):
+            self.tree_test2.insert(index)
+        for index in range(5, 4996, 10):
+            self.tree_test2.insert(index)
+        for N in [2, 10, 100, 1000, 10000]:
+            self.tree_N = B_tree(11, 6)
+            for index in range(5, 4996, N):
+                self.tree_N.insert(index)
         
+            
 
 
     def test_all_keys_increasing_order(self):
