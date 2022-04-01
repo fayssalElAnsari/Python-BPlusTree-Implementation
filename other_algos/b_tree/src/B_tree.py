@@ -1,7 +1,7 @@
 from B_node import B_node
 
 class B_tree:
-    def __init__(self, m):
+    def __init__(self, m, l):
         '''
         Constructor for the B_tree class
 
@@ -23,7 +23,8 @@ class B_tree:
             B_tree instance
         '''
         self.m = m
-        self.l = m//2
+        # self.l = m//2
+        self.l = l
         self.root_node = B_node(None, self)
         
 

@@ -9,7 +9,7 @@ class test_b_tree(unittest.TestCase):
     elements = [5, 1, 3, 16, 10, 2, 7, 4, 20, 25, 19, 6, 8, 17, 18, 21, 23]
 
     def setUp(self):
-        self.tree = B_tree(3)
+        self.tree = B_tree(3, 2)
 
     # insert 5, 1, 3, 16, 10, 2, 7, 4, 20, 25, 19, 6, 8, 17, 18, 21, 23
     def test_root_splits(self):
@@ -160,7 +160,7 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[2].children[0].keys, [16])
         self.assertEqual(self.tree.root_node.children[2].children[1].keys, [18, 19])
         self.assertEqual(self.tree.root_node.children[2].children[2].keys, [21, 25])
-        print(self.tree)
+        # print(self.tree)
 
         ### LEVEL 4 LAST STUPID TEST ###
         self.tree.insert(23)
@@ -179,17 +179,42 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[1].children[0].children[1].keys, [18, 19])
         self.assertEqual(self.tree.root_node.children[1].children[1].children[0].keys, [21])
         self.assertEqual(self.tree.root_node.children[1].children[1].children[1].keys, [25])
-        print(self.tree)
+        # print(self.tree)
 
         ##### BEGIN DELETE TESTS #####
-        self.tree.insert(22)
-        print(self.tree)
-        # self.tree.delete(21)
+        self.tree2 = B_tree(4, 1)
+        self.tree2.insert(10)
+        self.tree2.insert(20)
+        self.tree2.insert(30)
+        self.tree2.insert(40)
+        self.tree2.insert(50)
+        self.tree2.insert(60)
+        self.tree2.insert(70)
+        # print(self.tree2)
+
+
+        # self.tree2.delete(25)
         # print(self.tree)
-        self.tree.delete(25)
-        print(self.tree)
+        # self.tree2.delete(21)
+        # print(self.tree)
         
         
+    def test_battery_des_test(self):
+        # TEST 1
+        self.tree_test1 = B_tree(3, 2)
+        for index in range(2, 37, 2):
+            self.tree_test1.insert(index)
+        self.tree_test1.insert([7, 9, 11, 13])
+        ## verification insertion
+        self.assertFalse(self.tree_test1.search_element(42)) 
+        self.tree_test1.insert(42)
+        print(self.tree_test1)
+        self.assertTrue(self.tree_test1.search_element(42))
+
+        # TEST 2
+        self.tree_test2 = B_tree(11, 6)
+        
+
 
     def test_all_keys_increasing_order(self):
         self.tree.insert(self.elements)

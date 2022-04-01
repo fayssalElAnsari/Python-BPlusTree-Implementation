@@ -63,7 +63,6 @@ class B_node:
                 for i in range(len(self.keys) - 1):
                     if element < self.keys[i]:
                         return self.children[i].search_element(element)
-                        break
                 return self.children[-1].search_element(element)
         
 
@@ -258,10 +257,6 @@ class B_node:
         if self.parent:
             index = self.parent.children.index(self) - 1
             if index >= 0:
-                print("index > 0")
-                print(index)
-                print(self.l)
-                print(len(self.parent.children[index].keys))
                 if len(self.parent.children[index].keys) > self.l:
                     print("rotating clockwise")
                     left_key = self.parent.children[index].keys[-1]
@@ -270,8 +265,8 @@ class B_node:
                     self.parent.delete_key(upper_key)#recursivity?
                     self.parent.insert_key(left_key)
                     self.insert(upper_key)
-                else:
-                    self.rotate_counter_clockwise()
+            else:
+                self.rotate_counter_clockwise()
 
 
     def rotate_counter_clockwise(self):
@@ -283,8 +278,8 @@ class B_node:
         '''
         if self.parent:
             index = self.parent.children.index(self) + 1
-            if index < len(self.parent.children):
-                if (self.parent.children[index].keys) > self.l + 1:
+            if index < len(self.parent.children) + 1:
+                if len(self.parent.children[index].keys) > self.l:
                     print("rotating counter clockwise")
                     right_key = self.parent.children[index].keys[-1]
                     upper_key = self.parent.keys[index]
