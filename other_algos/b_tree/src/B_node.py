@@ -144,13 +144,16 @@ class B_node:
         -------
             None
         '''
-        all_keys = self.keys.copy()
-        all_keys.append(element)
-        all_keys.sort(reverse=False)
-        if len(all_keys) < self.m:
-            self.keys = all_keys
+        if (element not in self.keys):
+            all_keys = self.keys.copy()
+            all_keys.append(element)
+            all_keys.sort(reverse=False)
+            if len(all_keys) < self.m:
+                self.keys = all_keys
+            else:
+                self.split(element)
         else:
-            self.split(element)
+            print(str(element) + " already in keys list")
 
 
     def delete(self, element):
@@ -172,7 +175,10 @@ class B_node:
         -------
             None
         '''
-        self.search_node(element).delete_key(element)
+        node = self.search_node(element)
+        node.delete_key(element)
+        if len(node.keys) < self.l:
+            node.rotate_clockwise()
         self.balance()
 
 
@@ -191,7 +197,10 @@ class B_node:
         -------
             None
         '''
-        self.keys.remove(element)
+        if (element in self.keys):
+            self.keys.remove(element)
+        else:
+            print(str(element) + " not in keys list!")
 
 
     def balance(self):
@@ -209,16 +218,7 @@ class B_node:
         -------
             None
         '''
-        if self.is_leaf():
-            # get the index of the current child then look for the neighboor
-            if self.parent:
-                index = self.parent.children.index(self)-1
-                if len(self.parent.keys) > len(self.children):
-
-                if index >= 0:
-                    upward_key = self.parent.children[index].keys[-1]
-                    parent_key = self.parent.keys[index]
-                    self.   
+        # if self.is_leaf():
         self.delete_empty_child()
         for child in self.children:
             child.balance()
@@ -253,7 +253,7 @@ class B_node:
         if self.parent:
             index = self.parent.children.index(self) - 1
             if index > 0:
-                if (self.parent.self.parent.children[index].keys) > l + 1:
+                if (self.parent.self.parent.children[index].keys) > self.l + 1:
                     left_key = self.parent.children[index].keys[-1]
                     upper_key = self.parent.keys[index]
                     self.parent.children[index].delete(left_key)
@@ -261,7 +261,7 @@ class B_node:
                     self.parent.insert(left_key)
                     self.insert(upper_key)
                 else:
-                    self.rotate_counter_clockwise
+                    self.rotate_counter_clockwise()
 
 
     def rotate_counter_clockwise(self):
@@ -274,7 +274,7 @@ class B_node:
         if self.parent:
             index = self.parent.children.index(self) + 1
             if index < len(self.parent.children):
-                if (self.parent.self.parent.children[index].keys) > l + 1:
+                if (self.parent.self.parent.children[index].keys) > self.l + 1:
                     right_key = self.parent.children[index].keys[-1]
                     upper_key = self.parent.keys[index]
                     self.parent.children[index].delete(left_key)

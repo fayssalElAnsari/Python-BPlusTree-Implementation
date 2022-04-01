@@ -32,8 +32,9 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 
 
 ## Algorithm de recherche
-*   Complexite: O(log(N))
-    * Explication: 
+*   Complexite: `O(log(N))`
+    * Explication: N: Dans le pire des cas on a: `O(log m/2 (N))` et meilleur cas arbre equilibree `O(Log m (N))`
+                      `O(Log m (N) * Log (m))` multiplication par constant donc le m disparait
 *   Description: 
     1. Verifier si l'element `k` existe dans la liste des cles actuels
     2. Verifier si Le noeud actuel est une feuille
@@ -41,14 +42,15 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 
 
 ## Algorithm d'insertion
-*   Complexite: O(log(N))
-    *   Explication: 
+*   Complexite: `O(log(N))`
+    *   Explication: Utilisation de l'algorithm de recherche avant d'inserer
 *   Description:
 
 
 ## Algorithm de suppression
-*   Complexite: 
-*   Description:
+*   Complexite: `O(log(N))`
+    *   Explication: Utilisation de l'algorithm de recherche avant de supprimer
+*   Description: 
 
 
 ## Resumee des livrables

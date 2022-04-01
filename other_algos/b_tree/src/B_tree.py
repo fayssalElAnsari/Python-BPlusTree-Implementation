@@ -23,7 +23,7 @@ class B_tree:
             B_tree instance
         '''
         self.m = m
-        self.l = [m/2]
+        self.l = m//2
         self.root_node = B_node(self)
         self.parent = None
         
