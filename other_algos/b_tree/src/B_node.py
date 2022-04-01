@@ -3,7 +3,7 @@ class B_node:
         print("B_node")
 
 
-    def __init__(self, parent):
+    def __init__(self, parent, tree=None):
         '''
         Initializes a B_node instance
 
@@ -20,10 +20,15 @@ class B_node:
             An instance of the B_node class
         '''
         self.parent = parent
+        if tree == None:
+            self.tree = parent.tree
+        else:
+            self.tree = tree           
         self.keys = []
         self.children = []
-        self.m = parent.m
-        self.l = parent.l
+        self.m = tree.m
+        self.l = tree.l
+
         
 
     def search_element(self, element):
@@ -321,7 +326,7 @@ class B_node:
         all_keys.sort(reverse=False)
         median_index = len(all_keys)//2
         self.keys = all_keys[:median_index]
-        sibling_node = B_node(self.parent)
+        sibling_node = B_node(self.parent, self.tree)
         sibling_node.keys = all_keys[median_index+1:]
         all_children = self.children
         children_index = len(all_children)//2
@@ -333,11 +338,11 @@ class B_node:
             self.parent.children.insert(self.parent.children.index(self) + 1, sibling_node)
             self.parent.insert_key(all_keys[median_index])
         else:
-            parent_node = B_node(self.parent)
+            parent_node = B_node(self.parent, self.tree)
             parent_node.insert_key(all_keys[median_index])
             parent_node.children.append(self)
             parent_node.children.append(sibling_node)
-            self.parent.root_node = parent_node
+            self.tree.root_node = parent_node
             self.parent = parent_node
             sibling_node.parent = parent_node
         # self.print_whole_tree()
@@ -378,7 +383,7 @@ class B_node:
         -------
             None
         '''
-        return self.parent.parent == None
+        return True if self.parent == None else False
 
 
     def __repr__(self):
@@ -406,6 +411,7 @@ class B_node:
         while root_node.parent != None:
             root_node = root_node.parent
         print(root_node)
+
 
     if __name__ == '__main__':
         main()

@@ -14,6 +14,13 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * `Insertion` d'un element dans un B-Arbre.
 * `Suppression` d'un element du B-arbre.
 
+## Pour executer le program
+* Pour tester `l'arbre B`
+```
+cd .\other_algos\b_tree\test\
+python .\test_b_tree.py
+```
+* 
 
 ## Structure du projet
 ```bash
@@ -45,6 +52,7 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 *   Complexite: `O(log(N))`
     *   Explication: Utilisation de l'algorithm de recherche avant d'inserer
 *   Description:
+    1. 
 
 
 ## Algorithm de suppression

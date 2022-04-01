@@ -24,8 +24,7 @@ class B_tree:
         '''
         self.m = m
         self.l = m//2
-        self.root_node = B_node(self)
-        self.parent = None
+        self.root_node = B_node(None, self)
         
 
     def search_element(self, element):
