@@ -206,7 +206,7 @@ class test_b_tree(unittest.TestCase):
         self.tree.insert(self.elements)
         all_leafs = []
         for child in self.tree.children:
-            
+            break
         pass
 
     

@@ -32,7 +32,7 @@ class B_node:
 
         This function will check if an element exists in a given tree.
         The way it works is by calling itself recursively on the current node.
-        starting from the current node it will check the keys for the existance
+        starting from the current node it will check the keys for the existence
         of the element, if it exists it will return true. If not it will check if
         the current node is a leaf. If it's a leaf and there element is not in the
         keys then element doesn't exist in the current search. If it's not a leaf
@@ -173,7 +173,6 @@ class B_node:
             None
         '''
         self.search_node(element).delete_key(element)
-
         self.balance()
 
 
@@ -210,6 +209,16 @@ class B_node:
         -------
             None
         '''
+        if self.is_leaf():
+            # get the index of the current child then look for the neighboor
+            if self.parent:
+                index = self.parent.children.index(self)-1
+                if len(self.parent.keys) > len(self.children):
+
+                if index >= 0:
+                    upward_key = self.parent.children[index].keys[-1]
+                    parent_key = self.parent.keys[index]
+                    self.   
         self.delete_empty_child()
         for child in self.children:
             child.balance()
@@ -223,7 +232,7 @@ class B_node:
 
         Parameters
         ----------
-        None
+            None
 
         Returns
         -------
@@ -232,6 +241,52 @@ class B_node:
         for child in self.children:
             if (child.keys == []):
                 self.children.remove(child)
+
+    
+    def rotate_clockwise(self):
+        '''
+        Rotates the keys of the of current node and its parent 
+        and left sibling clockwise
+        
+        This function will be used in deletion process in case...
+        '''
+        if self.parent:
+            index = self.parent.children.index(self) - 1
+            if index > 0:
+                if (self.parent.self.parent.children[index].keys) > l + 1:
+                    left_key = self.parent.children[index].keys[-1]
+                    upper_key = self.parent.keys[index]
+                    self.parent.children[index].delete(left_key)
+                    self.parent.delete(upper_key)
+                    self.parent.insert(left_key)
+                    self.insert(upper_key)
+                else:
+                    self.rotate_counter_clockwise
+
+
+    def rotate_counter_clockwise(self):
+        '''
+        Rotates the keys of the of current node and its parent 
+        and right sibling clockwise
+        
+        This function will be used in deletion process in case...
+        '''
+        if self.parent:
+            index = self.parent.children.index(self) + 1
+            if index < len(self.parent.children):
+                if (self.parent.self.parent.children[index].keys) > l + 1:
+                    right_key = self.parent.children[index].keys[-1]
+                    upper_key = self.parent.keys[index]
+                    self.parent.children[index].delete(left_key)
+                    self.parent.delete(upper_key)
+                    self.parent.insert(right_key)
+                    self.insert(upper_key)
+                else:
+                    self.merge()
+
+
+    def merge(self):
+        pass
 
 
     def split(self, element):
