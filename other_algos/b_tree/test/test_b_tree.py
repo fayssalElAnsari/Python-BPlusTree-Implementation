@@ -201,27 +201,25 @@ class test_b_tree(unittest.TestCase):
         
     def test_battery_des_test(self):
         # TEST 1
-        self.tree_test1 = B_tree(3, 2)
+        self.tree = B_tree(3, 2)
         for index in range(2, 37, 2):
-            self.tree_test1.insert(index)
-        self.tree_test1.insert([7, 9, 11, 13])
+            self.tree.insert(index)
+        self.tree.insert([7, 9, 11, 13])
         ## verification insertion
-        self.assertFalse(self.tree_test1.search_element(42)) 
-        self.tree_test1.insert(42)
-        self.assertTrue(self.tree_test1.search_element(42))
+        self.assertFalse(self.tree.search_element(42)) 
+        self.tree.insert(42)
+        self.assertTrue(self.tree.search_element(42))
         # TEST 2
-        self.tree_test2 = B_tree(11, 6)
+        self.tree = B_tree(11, 6)
         for index in range(10, 5001, 10):
-            self.tree_test2.insert(index)
+            self.tree.insert(index)
         for index in range(5, 4996, 10):
-            self.tree_test2.insert(index)
+            self.tree.insert(index)
         for N in [2, 10, 100, 1000, 10000]:
             self.tree_N = B_tree(11, 6)
             for index in range(5, 4996, N):
                 self.tree_N.insert(index)
         
-            
-
 
     def test_all_keys_increasing_order(self):
         self.tree.insert(self.elements)
@@ -238,21 +236,25 @@ class test_b_tree(unittest.TestCase):
 
 
     def test_all_leafs_have_no_children(self):
-        # self.tree.insert(self.elements)
-        # all_leafs = []
-        # for child in self.tree.root_node.children:
-        #     break
-        pass
+        self.tree.insert(self.elements)
+        all_nodes = self.tree.depth_first_search()
+        leafs = []
+        for node in all_nodes:
+            if node.is_leaf():
+                leafs.append(node)
+        for leaf in leafs:
+            self.assertTrue(leaf.children == [])
 
     
-    
-
-
     def test_all_internal_nodes_have_at_most_n_minus_one_keys(self):
-        pass
-
+        self.tree.insert(self.elements)
+        all_nodes = self.tree.depth_first_search()
+        for node in all_nodes:
+            self.assertTrue(len(node.keys) <= self.tree.l)
+        
 
     def test_all_internal_nodes_have_at_most_n_children(self):
+        
         pass
 
 

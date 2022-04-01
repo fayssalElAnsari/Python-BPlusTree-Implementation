@@ -126,11 +126,9 @@ class B_tree:
         return header1 + header2 + body + footer
 
 
-    def depth_first_search(self, key_list=[]):
-        for child in node.children:
-            key_list.append(child.keys)
-            result =  child.depth_first_search(key_list)
-            return result
+    def depth_first_search(self):
+        return self.root_node.depth_first_search(self.root_node)
+        
 
 
     def breadth_first_search(self):

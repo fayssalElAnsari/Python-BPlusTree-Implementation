@@ -388,6 +388,15 @@ class B_node:
         return True if self.parent == None else False
 
 
+    def depth_first_search(self, node, node_list=[]):
+        if not node.is_leaf():
+            node_list = node_list + node.children
+            for child in node.children:
+                return child.depth_first_search(child, node_list)
+        else:
+            return node_list
+
+
     def __repr__(self):
         children_str = "" if self.is_leaf() else ", \"children\": " + str(self.children)
         return "{\"keys\": " + str(self.keys) + children_str + "}" 
