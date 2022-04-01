@@ -182,12 +182,13 @@ class test_b_tree(unittest.TestCase):
         print(self.tree)
 
         ##### BEGIN DELETE TESTS #####
-        self.tree.insert(26)
-        self.tree.delete(25)
-        self.tree.delete(2)
-        self.tree.delete(19)
-        self.tree.delete(26)
+        self.tree.insert(22)
         print(self.tree)
+        # self.tree.delete(21)
+        # print(self.tree)
+        self.tree.delete(25)
+        print(self.tree)
+        
         
 
     def test_all_keys_increasing_order(self):

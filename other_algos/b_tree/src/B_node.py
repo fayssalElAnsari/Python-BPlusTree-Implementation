@@ -184,7 +184,7 @@ class B_node:
         node.delete_key(element)
         if len(node.keys) < self.l:
             node.rotate_clockwise()
-        self.balance()
+        # self.balance()
 
 
     def delete_key(self, element):
@@ -257,13 +257,18 @@ class B_node:
         '''
         if self.parent:
             index = self.parent.children.index(self) - 1
-            if index > 0:
-                if (self.parent.self.parent.children[index].keys) > self.l + 1:
+            if index >= 0:
+                print("index > 0")
+                print(index)
+                print(self.l)
+                print(len(self.parent.children[index].keys))
+                if len(self.parent.children[index].keys) > self.l:
+                    print("rotating clockwise")
                     left_key = self.parent.children[index].keys[-1]
                     upper_key = self.parent.keys[index]
                     self.parent.children[index].delete(left_key)
-                    self.parent.delete(upper_key)
-                    self.parent.insert(left_key)
+                    self.parent.delete_key(upper_key)#recursivity?
+                    self.parent.insert_key(left_key)
                     self.insert(upper_key)
                 else:
                     self.rotate_counter_clockwise()
@@ -279,7 +284,8 @@ class B_node:
         if self.parent:
             index = self.parent.children.index(self) + 1
             if index < len(self.parent.children):
-                if (self.parent.self.parent.children[index].keys) > self.l + 1:
+                if (self.parent.children[index].keys) > self.l + 1:
+                    print("rotating counter clockwise")
                     right_key = self.parent.children[index].keys[-1]
                     upper_key = self.parent.keys[index]
                     self.parent.children[index].delete(left_key)
@@ -291,6 +297,7 @@ class B_node:
 
 
     def merge(self):
+        print("merging")
         pass
 
 
