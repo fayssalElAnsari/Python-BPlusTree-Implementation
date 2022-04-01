@@ -1,11 +1,12 @@
 # L3_INFO_Projet_EL-ANSARI
-
 L3-INFO-G6
+
 
 ## Buts
 * l'utilisation des notions deja vues en POO/COO pour realiser le projet demande. 
 * Introduction a des nouveaux algorithms
 * Apprentissage de nouvelles technologies
+
 
 ## Description du projet
 Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbres en utilisant python. Ces arbres devrait avoir les fonctinalites suivantes:
@@ -13,24 +14,23 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * `Insertion` d'un element dans un B-Arbre.
 * `Suppression` d'un element du B-arbre.
 
-## Grille d'evaluation
-* [ ] Demonstration + Documentation (apres chaque seance)
-* [ ] Execution des 2 tests donnees
-* [ ] Documentation (10 page au max), decrivant:
-    * [ ] Description de l'historique de l'arbre B
-    * [ ] Commentaires
-    * [ ] l'algorithm de recherche commmente
-        * [ ] Pseudo code
-        * [ ] Complexite
-        * [ ] Code python
-    * [ ] l'algorithm d'insertion
-        * [ ] Pseudo code
-        * [ ] Complexite
-        * [ ] Code python
-    * [ ] l'algorithm de suppression 
-        * [ ] Pseudo code
-        * [ ] Complexite
-        * [ ] Code python    
+
+## Structure du projet
+```bash
+├───enonces
+├───other_algos
+│   ├───binary_tree
+│   │   ├───src
+│   │   └───test
+│   └───b_tree
+│       ├───src
+│       │   └───__pycache__
+│       └───test
+├───src
+└───test
+    └───__pycache__
+```  
+
 
 ## Resumee des livrables
 #### 11/01/2022
@@ -64,7 +64,4 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * fixed and optimized find function
 * manual testing for delete and search
 * ...
-
-###### fix and optimize insert function
-###### add balancing tree function?
 
