@@ -24,12 +24,31 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 │   │   └───test
 │   └───b_tree
 │       ├───src
-│       │   └───__pycache__
 │       └───test
 ├───src
+├───doc
 └───test
-    └───__pycache__
 ```  
+
+
+## Algorithm de recherche
+*   Complexite: O(log(N))
+    * Explication: 
+*   Description: 
+    1. Verifier si l'element `k` existe dans la liste des cles actuels
+    2. Verifier si Le noeud actuel est une feuille
+    3. Appele recursive sur chaque enfant du neoud actuel
+
+
+## Algorithm d'insertion
+*   Complexite: O(log(N))
+    *   Explication: 
+*   Description:
+
+
+## Algorithm de suppression
+*   Complexite: 
+*   Description:
 
 
 ## Resumee des livrables
@@ -39,12 +58,14 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * Premier diagramme UML des classes necessaires pour la realisation du projet
 * ...
 
+
 #### 18/01/2022
 * Recherche BPlusTree et BTree
 * pseudo code algorithm insertion
 * pseudo code algorithm recherche
 * PseudoCode algorithm suppression
 * ...
+
 
 #### 25/01/2022
 * Creation de la class `BPNode.py`
@@ -53,11 +74,13 @@ Dans ce projet on va essaayer d'implementer la structure des donnees des B-Arbre
 * Passage a un `ArbreB+` au lieu d'un `BArbre`
 * ...
 
+
 #### 01/02/2022
 * fixed splitting elements
 * refactor constructor
 * fixed update_keys()
 * ...
+
 
 #### 22/02/2022
 * fixed and optimized delete function (updating keys for parent nodes)
