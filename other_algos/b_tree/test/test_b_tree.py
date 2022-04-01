@@ -6,6 +6,8 @@ import unittest
 
 
 class test_b_tree(unittest.TestCase):
+    elements = [5, 1, 3, 16, 10, 2, 7, 4, 20, 25, 19, 6, 8, 17, 18, 21, 23]
+
     def setUp(self):
         self.tree = B_tree(3)
 
@@ -178,16 +180,37 @@ class test_b_tree(unittest.TestCase):
         self.assertEqual(self.tree.root_node.children[1].children[1].children[1].keys, [25])
 
         ##### BEGIN DELETE TESTS #####
+        self.tree.insert(26)
         self.tree.delete(25)
+        self.tree.delete(2)
+        self.tree.delete(19)
         print(self.tree)
         
 
     def test_all_keys_increasing_order(self):
-        pass
+        self.tree.insert(self.elements)
+        self.node_keys_increasing_order(self.tree.root_node)
+        
+
+    def node_keys_increasing_order(self, node):
+        if node.children != None:
+            for child in node.children:
+                self.node_keys_increasing_order(child)
+        # testing keys from down to up
+        for index in range(len(node.keys)-1):
+            print("asserting..")
+            self.assertTrue(node.keys[index] < node.keys[index+1])
 
 
     def test_all_leafs_have_no_children(self):
+        self.tree.insert(self.elements)
+        all_leafs = []
+        for child in self.tree.children:
+            
         pass
+
+    
+    
 
 
     def test_all_internal_nodes_have_at_most_n_minus_one_keys(self):

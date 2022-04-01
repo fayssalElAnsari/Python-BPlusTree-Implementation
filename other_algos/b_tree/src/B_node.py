@@ -37,10 +37,14 @@ class B_node:
 
 
     def insert(self, element):
-        if self.is_leaf():
-            self.insert_key(element)
+        if type(element) == list:
+            for e in element:
+                self.insert(e)
         else:
-            (self.search_node(element)).insert(element)  
+            if self.is_leaf():
+                self.insert_key(element)
+            else:
+                (self.search_node(element)).insert(element)  
 
 
     def insert_key(self, element):
@@ -53,12 +57,29 @@ class B_node:
             self.split(element)
 
 
+    def delete(self, element):
+        self.search_node(element).delete_key(element)
+
+        self.balance()
+
+
     def delete_key(self, element):
-        self.keys.delete(element)
+        self.keys.remove(element)
+
+
+    def balance(self):
+        self.delete_empty_child()
+        for child in self.children:
+            child.balance()
+
+
+    def delete_empty_child(self):
+        for child in self.children:
+            if (child.keys == []):
+                self.children.remove(child)
 
 
     def split(self, element):
-        self.print_whole_tree()
         all_keys = self.keys.copy()
         all_keys.append(element)
         all_keys.sort(reverse=False)
@@ -75,7 +96,6 @@ class B_node:
         if not self.is_root():
             self.parent.children.insert(self.parent.children.index(self) + 1, sibling_node)
             self.parent.insert_key(all_keys[median_index])
-            self.print_whole_tree()
         else:
             parent_node = B_node(self.parent)
             parent_node.insert_key(all_keys[median_index])
@@ -84,11 +104,7 @@ class B_node:
             self.parent.root_node = parent_node
             self.parent = parent_node
             sibling_node.parent = parent_node
-            self.print_whole_tree()
-
-
-    def delete(self, element):
-        self.search_node(element).delete_key(element)
+        # self.print_whole_tree()
 
 
     def is_leaf(self):
