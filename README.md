@@ -100,10 +100,17 @@ We didn't use JIRA or similar software, instead we have simply put a `todo list`
 * The conditions of having a correct tree are all stated in the test files.
 
 ## DOCUMENTATION
-* To generate the documentation of a tree, cd into its root folder and run:
+* To generate the documentation execute the following commands:
   ```bash
-
+  pip install python-sphinx
+  mkdir docs
+  cd docs
+  sphinx-quickstart
+  sphinx-apidoc -o . ..
+  make html 
   ```
+  * When prompted to to [y/n] after the `sphinx-quickstart` command use the default values.
+  * Open the documentation from `./docs/_build/index.html`
 
 # 4. POSSIBLE MODIFICATIONS
 If you intend to read and maybe also modify this program the previous chapter contains some instructions on where everything is located and the reasoning behind some design choices.
