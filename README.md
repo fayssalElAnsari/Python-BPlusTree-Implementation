@@ -166,4 +166,4 @@ It is still possible to add these modifications to the project:
 [^2]: https://www.programiz.com/dsa/b-tree
 
 
-[b-tree_pic]:(pics/b-tree_pic.jpg)
+[b-tree_pic]:pics/b-tree_pic.jpg
