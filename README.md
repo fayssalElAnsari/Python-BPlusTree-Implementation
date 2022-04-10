@@ -13,6 +13,10 @@ B-trees were invented in Boeing research labs by `Edward M. McCreight` and `Rudo
 ## USES
 B-trees are generally used in `Databases` and `File Systems`. Usually, in databases, we have information stored in a distributed manner and the bottleneck isn't when communicating inside a node but rather when passing information between different nodes. Therefore it is better to have pieces of information that are related to each other in the same node or in a cluster of nodes close to each other. The same principle applies to distributed file systems. A B-tree generalizes a binary tree to have more than two values inside a node. This allows for having the positive aspects while also removing the negative aspects of having a binary tree.
 
+![A B-Tree picture][b-tree_pic][^2]
+
+
+
 # 2. GOALS
 In this project we intend to write an optimized b-tree implementation using `python`, we have followed famous programming conventions to write easy-to-understand and maintainable code. While learning new technologies and algorithms. 
 
@@ -90,6 +94,7 @@ We didn't use JIRA or similar software, instead we have simply put a `todo list`
 
 * The `__str__` and `__repr__` magic functions have been modified to simplify the visualization of trees/nodes.
 
+* The conditions of having a correct tree are all stated in the test files.
 
 ## DOCUMENTATION
 * To generate the documentation of a tree, cd into its root folder and run:
@@ -101,19 +106,19 @@ We didn't use JIRA or similar software, instead we have simply put a `todo list`
 If you intend to read and maybe also modify this program the previous chapter contains some instructions on where everything is located and the reasoning behind some design choices.
 
 It is still possible to add these modifications to the project:
-* Optimize the search algorithm to have a mix of binary search and linear search. Starting with a binary search and changing the algorithm with each step after a certain number of steps to finally come to the linear search.
+* [ ] Optimize the search algorithm to have a mix of binary search and linear search. Starting with a binary search and changing the algorithm with each step after a certain number of steps to finally come to the linear search.
   
-* When inserting and deleting we can traverse the tree only one time by keeping track of all the traversed full nodes and whether or not they will be split after the queued operation. This allows for a faster operation while also avoiding failing operations in the case of multiple threads. For example, looking for a key while another is being inserted at the same time if a node is split a certain time this could lead to reporting the key as non-existent even though it is present in the tree.
+* [ ] When inserting and deleting we can traverse the tree only one time by keeping track of all the traversed full nodes and whether or not they will be split after the queued operation. This allows for a faster operation while also avoiding failing operations in the case of multiple threads. For example, looking for a key while another is being inserted at the same time if a node is split a certain time this could lead to reporting the key as non-existent even though it is present in the tree.
 
-* Using many threads to further optimize each operation.
+* [ ] Using many threads to further optimize each operation.
 
-* In some cases allowing duplicate keys is useful, but in some others it could lead to ambiguity.
+* [ ] In some cases allowing duplicate keys is useful, but in some others it could lead to ambiguity.
 
-* Other algorithms are still not finished such as the B-Plus tree.
+* [ ] Other algorithms are still not finished such as the B-Plus tree.
 
-* Adding a better way to visualize the trees.
+* [ ] Adding a better way to visualize the trees.
 
-* More tests
+* [ ] More generalized tests to have better flexibility when modifying later on.
 
 <details>
   <summary>Each week's progress</summary>
@@ -157,3 +162,8 @@ It is still possible to add these modifications to the project:
 
 
 [^1]: Bayer, R.; McCreight, E. (July 1970). "Organization and maintenance of large ordered indices"
+
+[^2]: https://www.programiz.com/dsa/b-tree
+
+
+[b-tree_pic]:(pics/b-tree_pic.jpg)
