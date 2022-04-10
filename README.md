@@ -1,4 +1,7 @@
-# Fayssal EL ANSARI
+<h1 align="center"> Trees Data Structures Design & Implementation</h1>
+<h3 align="right">Fayssal EL ANSARI </h3>
+<h3 align="right">L3 INFO GROUP 6 </h3>
+
 > If you are already familiar with the B-tree data structure you can skip to chapter 4.
 
 # ABSTRACT
@@ -53,7 +56,7 @@ We didn't use JIRA or similar software, instead we have simply put a `todo list`
     pip install -r requirements.txt
     ```
 
-## EXECUTE
+## TEST
 * To test out the program you can run:
     ```bash
     cd .\other_algos\b_tree\test\
